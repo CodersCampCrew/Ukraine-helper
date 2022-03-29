@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist",
+    "strict": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@configs/*": ["app/configs/*"],
+      "@constrollers/*": ["app/constrollers/*"],
+      "@database/*": ["app/database/*"],
+      "@middlewares/*": ["app/middlewares/*"],
+      "@routes/*": ["app/routes/*"],
+      "@services/*": ["app/services/*"],
+      "@utils/*": ["app/utils/*"]
+    },
+    "useUnknownInCatchVariables": false
+  },
+  "include": ["app/**/*.ts", "tests/**/*.ts"]
+}
