@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { validateEmail } from '@database/validators';
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -8,7 +9,8 @@ const UserSchema = new mongoose.Schema({
     minLength: [8, 'At least 8 characters'],
     maxlength: [30, 'Max length is 30 characters'],
     trim: true,
-    unique: true
+    unique: true,
+    validate: [validateEmail, 'Invalid email']
   },
   password: {
     type: String,
@@ -33,10 +35,6 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minLength: [8, 'At least 8 characters'],
     maxlength: [10, 'Maximum 10 characters']
-  },
-  announcements: [{ type: mongoose.Types.ObjectId, ref: 'Announcement' }],
-  description: {
-    type: String
   }
 });
 
