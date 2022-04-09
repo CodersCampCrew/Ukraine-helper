@@ -1,12 +1,11 @@
 interface User {
-    userId: string,
     firstName: string,
     lastName: string,
     email: string,
     password: string,
     phone: string,
     city: string,
-    userRole: string,
+    role: string,
     verifiedByEmail: boolean,
     verifiedByAdmin: boolean
 }
