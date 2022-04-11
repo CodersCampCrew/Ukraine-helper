@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import { Grid, Button, Link } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -9,7 +9,7 @@ import {
   InvalidField,
   FormItem
 } from '../../../components';
-import { useHttpClient } from '../../../hooks/httpHook';
+import userService from '../../../services/userService';
 
 type FormValues = {
   firstName: string;
@@ -60,17 +60,12 @@ export const RegisterForm: React.FC = () => {
   });
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors }
   } = useForm<FormValues>({ resolver: yupResolver(schema) });
-  const { sendRequest } = useHttpClient();
 
   const submitForm: SubmitHandler<FormValues> = async (data) => {
-    const url = `http://localhost:3000/register`;
-    const response = await sendRequest(url, 'POST', JSON.stringify(data), {
-      'Content-Type': 'application/json'
-    });
+    const response = userService.register(data);
   };
 
   return (
