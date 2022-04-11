@@ -9,7 +9,7 @@ import {
   InvalidField,
   FormItem
 } from '../../../components';
-import { useHttpClient } from '../../../hooks/httpHook';
+import userService from '../../../services/userService';
 
 type FormValues = {
   email: string;
@@ -31,17 +31,12 @@ export const LoginForm: React.FC = () => {
   });
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors }
   } = useForm<FormValues>({ resolver: yupResolver(schema) });
-  const { sendRequest } = useHttpClient();
 
   const submitForm: SubmitHandler<FormValues> = async (data) => {
-    const url = `http://localhost:3000/login`;
-    const response = await sendRequest(url, 'POST', JSON.stringify(data), {
-      'Content-Type': 'application/json'
-    });
+    const response = userService.login(data);
   };
 
   return (

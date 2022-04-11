@@ -8,5 +8,8 @@
   },
   "scripts": {
     "format": "prettier --write ."
+  },
+  "dependencies": {
+    "axios": "^0.26.1"
   }
 }
