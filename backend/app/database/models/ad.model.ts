@@ -2,14 +2,13 @@ import {Schema, model} from 'mongoose';
 import {Ad, Categories} from './ad.interface';
 
 
-
 const adSchema = new Schema<Ad>({
-    createdByUser: {type: String, required: true},
-    createAtDate: {type: Date, required: true},
-    category: {type: Categories, required: true},
-    properties: {type: {mixed: any} , require : true}
+    createdBy: {type: String, required: true},
+    createdAt: {type: Date, required: true},
+    category: {type: String,  enum: Object.values(Categories), required: true},
+    properties: {type: {} , require : true}
 })
 
-const Ad = model<Ad>('Ad', adSchema);
+const AdModel = model<Ad>('Ad', adSchema);
 
-export default Ad;
+export default AdModel;
