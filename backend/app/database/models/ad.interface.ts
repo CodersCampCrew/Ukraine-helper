@@ -1,12 +1,12 @@
 export enum Categories{
     transport = 'transport',
     permanentStay = 'permanentStay',
+    temporaryStay = 'temporaryStay',
     sleepover = 'sleepover',
     forkids = 'forkids',
     electronic = 'electronic',
     legalAssistance = 'legalAssistance',
-    temporaryState = 'temporaryState',
-    medicalAndPsychologicalAssistance = 'medicalAndPsychologicalAssistance'
+    medicalAssistance = 'medicalAssistance'
 }
 
 // export interface Ad {
@@ -16,28 +16,91 @@ export enum Categories{
 // properties: {location: string}
 // }
 
-interface commonInfoAd {
+interface commonInfo {
     createdBy: string,
     createdAt: Date;
 }
 
-export interface TransportAd extends commonInfoAd {
+export interface Transport extends commonInfo {
     category: Categories.transport;
     properties: {
         for: string,
         from: string,
         to: string,
         time: Date;
+        desc: string;
     }
 }
-export interface PermanentStayAd extends commonInfoAd {
+export interface PermanentStay extends commonInfo {
     category: Categories.permanentStay;
     properties: {
         for: string,
         closeTo: string,
         availableFrom: string,
         available: Date;
+        desc: string;
+    }
+}
+export interface TemporaryStay extends commonInfo {
+    category: Categories.temporaryStay;
+    properties: {
+        for: string,
+        closeTo: string,
+        availableFrom: string,
+        available: Date;
+        desc: string;
+    }
+}
+export interface Sleepover extends commonInfo {
+    category: Categories.sleepover;
+    properties: {
+        for: string,
+        closeTo: string,
+        availableFrom: string,
+        available: Date;
+        desc: string;
+    }
+}
+export interface ForKids extends commonInfo {
+    category: Categories.forkids;
+    properties: {
+        for: string,
+        closeTo: string,
+        availableFrom: string,
+        available: Date;
+        desc: string;
+    }
+}
+export interface Electronic extends commonInfo {
+    category: Categories.electronic;
+    properties: {
+        for: string,
+        closeTo: string,
+        availableFrom: string,
+        available: Date;
+        desc: string;
+    }
+}
+export interface LegalAssistance extends commonInfo {
+    category: Categories.legalAssistance;
+    properties: {
+        for: string,
+        closeTo: string,
+        availableFrom: string,
+        available: Date;
+        desc: string;
+    }
+}
+export interface MedicalAssistance extends commonInfo {
+    category: Categories.medicalAssistance;
+    properties: {
+        for: string,
+        closeTo: string,
+        availableFrom: string,
+        available: Date;
+        desc: string;
     }
 }
 
-export type Ad = TransportAd | PermanentStayAd;
+export type Ad = Transport | PermanentStay | TemporaryStay | Sleepover | 
+                 ForKids | Electronic | LegalAssistance | MedicalAssistance;
