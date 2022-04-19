@@ -2,6 +2,7 @@
 import User from '@database/models/user.model';
 import express, { NextFunction, Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import bcrypt from 'bcryptjs';
 
 
 const userRouter = Router();
@@ -15,6 +16,9 @@ userRouter.post("/register", async (req, res) => {
 
     const userExist = await User.findOne({email: req.body.email}); 
     if (userExist) { return res.status(StatusCodes.CONFLICT).send("Email already exists") };
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     const user = new User({
         firstName: req.body.firstName,
