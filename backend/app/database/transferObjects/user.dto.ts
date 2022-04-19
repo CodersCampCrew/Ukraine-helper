@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from '@hapi/joi';
 import { JoiPassword } from "hapi-joi-password";
 import User from "@database/models/user.interface";
 
@@ -23,3 +23,5 @@ const registerUserValidation = (data: User) => {
     });
     return schema.validate(data, {abortEarly: false});
 }
+
+export default registerUserValidation;

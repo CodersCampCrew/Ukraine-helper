@@ -3,16 +3,16 @@ import User from '@database/models/user.model';
 import express, { NextFunction, Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
-
+import registerUserValidation from '@database/transferObjects/user.dto';
 
 const userRouter = Router();
-
 
 // REGISTER - POST
 userRouter.post("/register", async (req, res) => {
 
     //VALIDATION
-
+    const {error} = registerUserValidation(req.body);
+    if (error) { return res.status(StatusCodes.BAD_REQUEST).send(error.details.map((element) => element.message.replace(`\"`,'')))};
 
     const userExist = await User.findOne({email: req.body.email}); 
     if (userExist) { return res.status(StatusCodes.CONFLICT).send("Email already exists") };
@@ -43,6 +43,10 @@ try {
 
 
 // LOGIN - POST
+userRouter.post('/login', async (req, res) => {
+    
+})
+
 
 // USER - GET
 
