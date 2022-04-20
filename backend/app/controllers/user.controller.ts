@@ -9,10 +9,8 @@ import { createCookie, generateAuthToken } from '@utils/jwt.utils';
 
 export const userRouter = Router();
 
-// REGISTER - POST
-userRouter.post("/register", async (req, res) => {
+export const register = async (req: Request, res: Response) => {
 
-    //VALIDATION
     const {error} = registerUserValidation(req.body);
     if (error) { return res.status(StatusCodes.BAD_REQUEST).send(error.details.map((element) => element.message.replace(`\"`,'')))};
 
@@ -44,11 +42,10 @@ try {
     res.setHeader('Set Cookie', [createCookie(TokenData)]);
     res.send(user);
 
-});
+};
 
 
-// LOGIN - POST
-userRouter.post('/login', async (req, res, next) => {
+export const login = async (req: Request, res: Response) => {
     const user = await User.findOne({email: req.body.email}); 
     if (!user) { return res.status(StatusCodes.CONFLICT).send("User not registered") };
     
@@ -58,12 +55,4 @@ userRouter.post('/login', async (req, res, next) => {
     const TokenData = generateAuthToken(user);
     res.setHeader('Set Cookie', [createCookie(TokenData)]);
     res.send("You are logged in");
-    next();
-})
-
-
-// USER - GET
-
-// USER - UPDATE
-
-// 
+};
