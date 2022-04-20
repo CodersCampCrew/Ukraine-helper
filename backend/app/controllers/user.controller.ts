@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 import registerUserValidation from '@database/transferObjects/user.dto';
 import { createCookie, generateAuthToken } from '@database/transferObjects/jwt.dto';
 
-const userRouter = Router();
+export const userRouter = Router();
 
 // REGISTER - POST
 userRouter.post("/register", async (req, res) => {
