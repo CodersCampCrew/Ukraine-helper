@@ -1,6 +1,7 @@
 const routes = {
   home: '/',
-  sample: '/sample'
+  category: "/category",
+  announcements: "/announcements"
 };
 
 export default routes;
