@@ -4,7 +4,8 @@ import express, { NextFunction, Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import registerUserValidation from '@database/transferObjects/user.dto';
-import { createCookie, generateAuthToken } from '@database/transferObjects/jwt.dto';
+import { createCookie, generateAuthToken } from '@utils/jwt.utils';
+
 
 export const userRouter = Router();
 
@@ -25,7 +26,7 @@ userRouter.post("/register", async (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName, 
         email: req.body.email, 
-        password: req.body.password,
+        password: hashedPassword,
         phone: req.body.phone, 
         city: req.body.city, 
         role: req.body.role, 
