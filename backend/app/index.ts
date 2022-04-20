@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import express, { NextFunction, Request, Response } from 'express';
 import StatusCodes from 'http-status-codes';
 import 'express-async-errors';
+import cors from "cors"
 
 import apiRouter from '@routes/api';
 import { CustomError } from '@utils/errors';
@@ -12,6 +13,8 @@ import { port, serverStartMsg } from '@configs/server';
 const app = express();
 
 // **** Middlewares **** //
+
+app.use(cors());
 
 // Common middlewares
 app.use(express.json());
