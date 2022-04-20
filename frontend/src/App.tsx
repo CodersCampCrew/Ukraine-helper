@@ -11,10 +11,9 @@ export const App = () => {
   return (
     <Routes>
       <Route path={routes.home} element={<Layout />}>
-        <Route index element={<HomePage/>} />
-        <Route path={routes.sample} element={<div />} />
+        {/* <Route path={routes.sample} element={<div />} /> */}
         <Route path={routes.login} element={<Login/>} />
-        <Route path="*" element={<div />} />
+        {/* <Route path="*" element={<div />} /> */}
       </Route>
     </Routes>
   );
