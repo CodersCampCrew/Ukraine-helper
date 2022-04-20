@@ -4,8 +4,9 @@ import express, { NextFunction, Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import registerUserValidation from '@database/transferObjects/user.dto';
+import { createCookie, generateAuthToken } from '@database/transferObjects/jwt.dto';
 
-const userRouter = Router();
+export const userRouter = Router();
 
 // REGISTER - POST
 userRouter.post("/register", async (req, res) => {
@@ -30,28 +31,33 @@ userRouter.post("/register", async (req, res) => {
         role: req.body.role, 
         verifiedByEmail: req.body.verifiedByEmail, 
         verifiedByAdmin: req.body.verifiedByAdmin 
-    })
-
+    });
+    
 try {
     const savedUser = await user.save();
     res.status(StatusCodes.CREATED).send(savedUser);    
 } catch (err) {
     res.status(StatusCodes.SERVICE_UNAVAILABLE).send(err);
 }
+    const TokenData = generateAuthToken(user);
+    res.setHeader('Set Cookie', [createCookie(TokenData)]);
+    res.send(user);
 
 });
 
 
 // LOGIN - POST
-userRouter.post('/login', async (req, res) => {
+userRouter.post('/login', async (req, res, next) => {
     const user = await User.findOne({email: req.body.email}); 
     if (!user) { return res.status(StatusCodes.CONFLICT).send("User not registered") };
     
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) { return res.status(StatusCodes.BAD_REQUEST).send('Invalid password') };
 
-    
-
+    const TokenData = generateAuthToken(user);
+    res.setHeader('Set Cookie', [createCookie(TokenData)]);
+    res.send("You are logged in");
+    next();
 })
 
 

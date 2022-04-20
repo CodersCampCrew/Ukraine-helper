@@ -2,13 +2,19 @@ import jwt from 'jsonwebtoken';
 import User from '@database/models/user.interface';
 import { TokenData, DataStoredInToken } from '@utils/jwt.utils';
 
-const createToken = (user: User):TokenData => {
+export const generateAuthToken = (user: User):TokenData => {
     const expiresIn = 60 *60;
     const secret = process.env.JWT_SECRET;
     const dataStoredInToken:DataStoredInToken = {
-        _id: user._id
+        id: user._id, userName: user.firstName, userEmail: user.email
     }
 
-    return { expiresIn, token: jwy.sign(dataStoredInToken, secret, { expiresIn }),
-};
+    return { 
+        token: jwt.sign(dataStoredInToken, secret as string, { expiresIn }),
+        expiresIn, 
+    };
+}
+
+export const createCookie = (tokenData:TokenData) => {
+    return `Authorization=${tokenData}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
 }
