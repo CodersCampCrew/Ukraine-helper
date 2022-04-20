@@ -14,8 +14,8 @@ userRouter.post("/register", async (req, res) => {
     const {error} = registerUserValidation(req.body);
     if (error) { return res.status(StatusCodes.BAD_REQUEST).send(error.details.map((element) => element.message.replace(`\"`,'')))};
 
-    const userExist = await User.findOne({email: req.body.email}); 
-    if (userExist) { return res.status(StatusCodes.CONFLICT).send("Email already exists") };
+    const emailExist = await User.findOne({email: req.body.email}); 
+    if (emailExist) { return res.status(StatusCodes.CONFLICT).send("Email already exists") };
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -44,7 +44,14 @@ try {
 
 // LOGIN - POST
 userRouter.post('/login', async (req, res) => {
+    const user = await User.findOne({email: req.body.email}); 
+    if (!user) { return res.status(StatusCodes.CONFLICT).send("User not registered") };
     
+    const validPassword = await bcrypt.compare(req.body.password, user.password);
+    if (!validPassword) { return res.status(StatusCodes.BAD_REQUEST).send('Invalid password') };
+
+    
+
 })
 
 
