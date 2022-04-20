@@ -4,6 +4,8 @@ export interface TokenData {
 }
 
 export interface DataStoredInToken {
-    _id: string;
+    id: string;
+    userName: string;
+    userEmail: string;
 }
 
