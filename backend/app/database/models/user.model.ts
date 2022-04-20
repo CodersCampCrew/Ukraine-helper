@@ -9,6 +9,7 @@ const userSchema = new Schema<User>({
     phone: { type: String, required: true},
     city: { type: String, required: true},
     role: { type: String, required: true},
+    areaCode: { type: String, required: true},
     verifiedByEmail: { type: Boolean },
     verifiedByAdmin: { type: Boolean }
 })

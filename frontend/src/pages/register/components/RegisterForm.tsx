@@ -13,11 +13,11 @@ import userService from '../../../services/userService';
 
 type FormValues = {
   firstName: string;
-  surname: string;
+  lastName: string;
   city: string;
   email: string;
   areaCode: string;
-  phoneNumber: string;
+  phone: string;
   password: string;
 };
 
@@ -27,19 +27,19 @@ export const RegisterForm: React.FC = () => {
       .required('First name is required')
       .min(3, 'First name must be at least 3 characters')
       .max(20, 'First name must not exceed 20 characters'),
-    surname: Yup.string()
+    lastName: Yup.string()
       .required('Surname is required')
       .min(3, 'Surname must be at least 3 characters')
       .max(20, 'Surname must not exceed 20 characters'),
     city: Yup.string()
-      .required('Surname is required')
-      .min(3, 'Surname must be at least 3 characters')
-      .max(20, 'Surname must not exceed 20 characters'),
+      .required('City is required')
+      .min(3, 'City name must be at least 3 characters')
+      .max(20, 'City must not exceed 20 characters'),
     email: Yup.string()
       .required('Email is required')
       .email('Email is required')
       .min(6, 'Email must be at least 6 characters')
-      .max(20, 'Email must not exceed 20 characters'),
+      .max(50, 'Email must not exceed 20 characters'),
     areaCode: Yup.string()
       .required('Area code is required')
       .matches(
@@ -48,11 +48,11 @@ export const RegisterForm: React.FC = () => {
       )
       .min(2, 'Area code must be at least 2 characters')
       .max(4, 'Area code must not exceed 4 characters'),
-    phoneNumber: Yup.string()
+    phone: Yup.string()
       .required('Phone number is required')
       .matches(/^[0-9]+$/, 'Only digits')
-      .min(7, 'House number must be at least 7 characters')
-      .max(9, 'House number must not exceed 9 characters'),
+      .min(9, 'Phone number must be at least 9 characters')
+      .max(9, 'Phone number must not exceed 9 characters'),
     password: Yup.string()
       .required('Password is required')
       .min(6, 'Password must be at least 6 characters')
@@ -97,13 +97,13 @@ export const RegisterForm: React.FC = () => {
               <Grid item xs={5} sm={5} md={4}>
                 <FormItem>
                   <FormInput
-                    id="surname"
+                    id="lastName"
                     InputProps={{ disableUnderline: true }}
-                    label="Surname"
+                    label="Last name"
                     variant="filled"
-                    {...register('surname')}
+                    {...register('lastName')}
                   />
-                  <InvalidField>{errors.surname?.message}</InvalidField>
+                  <InvalidField>{errors.lastName?.message}</InvalidField>
                 </FormItem>
               </Grid>
               <Grid item xs={12} sm={5} md={4}>
@@ -145,13 +145,13 @@ export const RegisterForm: React.FC = () => {
               <Grid item xs={6} sm={5} md={4}>
                 <FormItem>
                   <FormInput
-                    id="phoneNumber"
+                    id="phone"
                     InputProps={{ disableUnderline: true }}
                     label="Phone number"
                     variant="filled"
-                    {...register('phoneNumber')}
+                    {...register('phone')}
                   />
-                  <InvalidField>{errors.phoneNumber?.message}</InvalidField>
+                  <InvalidField>{errors.phone?.message}</InvalidField>
                 </FormItem>
               </Grid>
               <Grid item xs={12} sm={5} md={4}>

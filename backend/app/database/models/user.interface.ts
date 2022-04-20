@@ -7,6 +7,7 @@ interface User {
     phone: string,
     city: string,
     role: string,
+    areaCode: string,
     verifiedByEmail: boolean,
     verifiedByAdmin: boolean
 }

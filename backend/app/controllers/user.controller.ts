@@ -29,6 +29,7 @@ userRouter.post("/register", async (req, res) => {
         phone: req.body.phone, 
         city: req.body.city, 
         role: req.body.role, 
+        areaCode: req.body.areaCode,
         verifiedByEmail: req.body.verifiedByEmail, 
         verifiedByAdmin: req.body.verifiedByAdmin 
     });

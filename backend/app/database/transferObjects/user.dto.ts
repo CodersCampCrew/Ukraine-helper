@@ -6,19 +6,18 @@ import User from "@database/models/user.interface";
 
 const registerUserValidation = (data: User) => {
     const schema = Joi.object<User>({
-        firstName: Joi.string().min(6).required(),
-        lastName: Joi.string().min(6).required(),
+        firstName: Joi.string().min(3).required(),
+        lastName: Joi.string().min(3).required(),
+        city: Joi.string().min(3).required(),
         email: Joi.string().min(6).required().email(),
         password: JoiPassword
                     .string()
-                    .minOfSpecialCharacters(3)
-                    .minOfLowercase(4)
-                    .minOfUppercase(5)
-                    .minOfNumeric(6)
+                    .minOfLowercase(6)
                     .noWhiteSpaces(),                    
         phone: Joi.string().length(9).pattern(/^[0-9]+$/).required(),
         role: Joi.string().valid('volunteer', 'refugee', 'admin'),
-        verifiedByEmail: Joi.boolean().required(),        
+        areaCode: Joi.string().required(),
+        verifiedByEmail: Joi.boolean().optional(),        
         verifiedByAdmin: Joi.boolean().optional()    
     });
     return schema.validate(data, {abortEarly: false});
