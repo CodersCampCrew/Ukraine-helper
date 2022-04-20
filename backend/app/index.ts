@@ -8,6 +8,7 @@ import 'express-async-errors';
 import apiRouter from '@routes/api';
 import { CustomError } from '@utils/errors';
 import { port, serverStartMsg } from '@configs/server';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -16,6 +17,7 @@ const app = express();
 // Common middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Show routes called in console
 app.use(morgan('dev'));
