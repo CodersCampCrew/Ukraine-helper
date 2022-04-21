@@ -3,13 +3,12 @@ import express, { NextFunction, Request, Response, Router } from 'express';
 
 export const adRouter = Router();
 
-//Get
-
-adRouter.get('/all' , async (req, res) =>{
+export const allAd = async (req: Request, res: Response) =>{
     const allAd = await AdModel.find()
-})
+}
 
-adRouter.get('/transport' , async (req, res)=>{
+
+export const transport = async (req: Request, res: Response)=>{
     try {
     const transport = await AdModel.find( {category: 'transport'});
     res.status(200).json(transport);
@@ -17,9 +16,9 @@ adRouter.get('/transport' , async (req, res)=>{
     catch (error){
         res.status(404)
     }
-});
+};
 
-adRouter.get('/permanentStay' , async (req, res)=>{
+export const pernamentStay = async (req: Request, res: Response)=>{
     try {
     const permanentStay = await AdModel.find( {category: 'permanentStay'});
     res.status(200).json(permanentStay);
@@ -27,19 +26,9 @@ adRouter.get('/permanentStay' , async (req, res)=>{
     catch (error){
         res.status(404)
     }
-});
+};
 
-adRouter.get('/permanentStay' , async (req, res)=>{
-    try {
-    const permanentStay = await AdModel.find( {category: 'permanentStay'});
-    res.status(200).json(permanentStay);
-    }
-    catch (error){
-        res.status(404)
-    }
-});
-
-adRouter.get('/temporaryStay' , async (req, res)=>{
+export const temporaryStay = async (req: Request, res: Response)=>{
     try {
     const temporaryStay = await AdModel.find( {category: 'temporaryStay'});
     res.status(200).json(temporaryStay);
@@ -47,9 +36,9 @@ adRouter.get('/temporaryStay' , async (req, res)=>{
     catch (error){
         res.status(404)
     }
-});
+};
 
-adRouter.get('/sleepover' , async (req, res)=>{
+export const sleepover = async (req: Request, res: Response)=>{
     try {
     const sleepover = await AdModel.find( {category: 'sleepover'});
     res.status(200).json(sleepover);
@@ -57,19 +46,19 @@ adRouter.get('/sleepover' , async (req, res)=>{
     catch (error){
         res.status(404)
     }
-});
+};
 
-adRouter.get('/forkids' , async (req, res)=>{
+export const forKids = async (req: Request, res: Response)=>{
     try {
-    const forkids = await AdModel.find( {category: 'forkids'});
-    res.status(200).json(forkids);
+    const forKids = await AdModel.find( {category: 'forKids'});
+    res.status(200).json(forKids);
     }
     catch (error){
         res.status(404)
     }
-});
+};
 
-adRouter.get('/electronic' , async (req, res)=>{
+export const electronic = async (req: Request, res: Response)=>{
     try {
     const electronic = await AdModel.find( {category: 'electronic'});
     res.status(200).json(electronic);
@@ -77,9 +66,9 @@ adRouter.get('/electronic' , async (req, res)=>{
     catch (error){
         res.status(404)
     }
-});
+};
 
-adRouter.get('/legalAssistance' , async (req, res)=>{
+export const legalAssistance = async (req: Request, res: Response)=>{
     try {
     const legalAssistance = await AdModel.find( {category: 'legalAssistance'});
     res.status(200).json(legalAssistance);
@@ -87,9 +76,9 @@ adRouter.get('/legalAssistance' , async (req, res)=>{
     catch (error){
         res.status(404)
     }
-});
+};
 
-adRouter.get('/medicalAssistance' , async (req, res)=>{
+export const medicalAssistance = async (req: Request, res: Response)=>{
     try {
     const medicalAssistance = await AdModel.find( {category: 'medicalAssistance'});
     res.status(200).json(medicalAssistance);
@@ -97,10 +86,10 @@ adRouter.get('/medicalAssistance' , async (req, res)=>{
     catch (error){
         res.status(404)
     }
-});
+};
 
 //Post
-adRouter.post('/createAd', async (req,res) => {
+export const ad = async (req: Request, res: Response) => {
     const ad = new AdModel({
         createdBy: req.body.createdBy,
         createdAt: req.body.createdAt,
@@ -115,4 +104,4 @@ adRouter.post('/createAd', async (req,res) => {
         res.status(422).json({ message: error.message});
         console.log(error);
     }
-});
+};
