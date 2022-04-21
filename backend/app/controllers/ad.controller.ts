@@ -1,5 +1,7 @@
 import AdModel from "@database/models/ad.model";
 import express, { NextFunction, Request, Response, Router } from 'express';
+import { StatusCodes } from "http-status-codes";
+
 
 export const adRouter = Router();
 
@@ -14,7 +16,7 @@ export const transport = async (req: Request, res: Response)=>{
     res.status(200).json(transport);
     }
     catch (error){
-        res.status(404)
+        res.status(StatusCodes.BAD_REQUEST)
     }
 };
 
@@ -24,7 +26,7 @@ export const pernamentStay = async (req: Request, res: Response)=>{
     res.status(200).json(permanentStay);
     }
     catch (error){
-        res.status(404)
+        res.status(StatusCodes.BAD_REQUEST)
     }
 };
 
@@ -34,7 +36,7 @@ export const temporaryStay = async (req: Request, res: Response)=>{
     res.status(200).json(temporaryStay);
     }
     catch (error){
-        res.status(404)
+        res.status(StatusCodes.BAD_REQUEST)
     }
 };
 
@@ -44,7 +46,7 @@ export const sleepover = async (req: Request, res: Response)=>{
     res.status(200).json(sleepover);
     }
     catch (error){
-        res.status(404)
+        res.status(StatusCodes.BAD_REQUEST)
     }
 };
 
