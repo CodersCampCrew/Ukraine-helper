@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 import User from '@database/models/user.interface';
+import { DateTime } from 'luxon';
 export interface TokenData {
   token: string;
-  expiresIn: number;
+  expiresIn: Date;
 }
 export interface DataStoredInToken {
   id: string;
@@ -11,7 +12,7 @@ export interface DataStoredInToken {
 }
 
 export const generateAuthToken = (user: User): TokenData => {
-  const expiresIn = 60 * 60;
+  const expiresAt = DateTime.utc().plus({hour: 1}).toJSDate();
   const secret = process.env.JWT_SECRET;
   const dataStoredInToken: DataStoredInToken = {
     id: user._id,
@@ -20,11 +21,11 @@ export const generateAuthToken = (user: User): TokenData => {
   };
 
   return {
-    token: jwt.sign(dataStoredInToken, secret as string, { expiresIn }),
-    expiresIn
+    token: jwt.sign(dataStoredInToken, secret as string, { expiresIn: 60*60 }),
+    expiresIn: expiresAt
   };
 };
 
 export const createCookie = (tokenData: TokenData) => {
-  return `Authorization=${tokenData}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
+  return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
 };

@@ -1,6 +1,8 @@
 import AdModel from "@database/models/ad.model";
+import RequestWithUser from "@utils/requestwithcontext.interface";
 import express, { NextFunction, Request, Response, Router } from 'express';
 import { StatusCodes } from "http-status-codes";
+import { DateTime } from "luxon";
 
 
 export const adRouter = Router();
@@ -91,10 +93,10 @@ export const medicalAssistance = async (req: Request, res: Response)=>{
 };
 
 //Post
-export const ad = async (req: Request, res: Response) => {
+export const createAd = async (req: RequestWithUser, res: Response) => {
     const ad = new AdModel({
-        createdBy: req.body.createdBy,
-        createdAt: req.body.createdAt,
+        createdBy: req.user?._id,
+        createdAt: DateTime.utc().toJSDate(),
         category: req.body.category,
         properties: req.body.properties
     });
