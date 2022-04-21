@@ -8,7 +8,13 @@ import { DateTime } from "luxon";
 export const adRouter = Router();
 
 export const allAd = async (req: Request, res: Response) =>{
+    try {
     const allAd = await AdModel.find()
+    res.status(StatusCodes.ACCEPTED).json(allAd);
+    }
+    catch (error) {
+        res.status(StatusCodes.BAD_REQUEST)
+    }
 }
 
 
