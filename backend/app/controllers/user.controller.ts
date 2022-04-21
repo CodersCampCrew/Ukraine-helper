@@ -39,7 +39,9 @@ const register = (role: roles) => async (req: Request, res: Response) => {
 
   try {
     const savedUser = await user.save();
+    savedUser.password = undefined as any;
     res.status(StatusCodes.CREATED).send(savedUser);
+    
   } catch (err) {
     res.status(StatusCodes.SERVICE_UNAVAILABLE).send(err);
   }
@@ -60,6 +62,8 @@ export const login = async (req: Request, res: Response) => {
   }
 
   const TokenData = generateAuthToken(user);
-  res.setHeader('Set Cookie', [createCookie(TokenData)]);
+  //res.setHeader('Set-Cookie', [createCookie(TokenData)]);
+  res.cookie("Authorization",TokenData.token, {httpOnly: true, expires: TokenData.expiresIn} )
   res.send('You are logged in');
 };
+
