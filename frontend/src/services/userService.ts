@@ -9,7 +9,7 @@ const userService = {
   },
   async register(userData: {}) {
     const data = await serverAPI.post({
-      url: 'http://localhost:3001/api/user/register',
+      url: 'http://localhost:3001/api/user/registerVolunteer',
       data: userData
     });
     return data;

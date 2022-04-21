@@ -16,7 +16,8 @@ const registerUserValidation = (data: User) => {
       .length(9)
       .pattern(/^[0-9]+$/)
       .required(),
-    role: Joi.string().valid(roles).optional,
+    role: Joi.string().valid(['volunteer', 'admin', 'refugee'] as Array<roles>)
+      .optional,
     areaCode: Joi.string().required(),
     verifiedByEmail: Joi.boolean().optional(),
     verifiedByAdmin: Joi.boolean().optional()
