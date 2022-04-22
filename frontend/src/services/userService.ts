@@ -2,7 +2,7 @@ import serverAPI from './serverAPI';
 const userService = {
   async login(userData: { email: string; password: string }) {
     const data = await serverAPI.post({
-      url: '/http://localhost:3001/api/user/register',
+      url: '/http://localhost:3001/api/user/login',
       data: userData
     });
     return data;
