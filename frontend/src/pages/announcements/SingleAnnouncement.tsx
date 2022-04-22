@@ -1,40 +1,71 @@
-import React from 'react';
-import { dummyData } from './dummyData';
-import { category } from '../../assets/category';
+import React, { useEffect, useState } from 'react';
+import { categories } from '../../assets/categories';
 import styles from './SingleAnnouncement.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone, faMessage, faXmark } from '@fortawesome/free-solid-svg-icons';
+import announcementService from '../../services/announcementService';
+import { useParams } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 export const SingleAnnouncement = () => {
-  //   const filter = category.filter((type) => type.name === dummyData.type);
-
-  return (
+  const { id } = useParams();
+  const [announcement, setAnnouncement] = useState<any>(null);
+  useEffect(() => {
+    const getAnnouncement = async () => {
+      const fetchedAnnouncement =
+        await announcementService.getSingleAnnouncement(id as string);
+      setAnnouncement(fetchedAnnouncement);
+    };
+    getAnnouncement();
+  }, [id]);
+  return announcement ? (
     <div className={styles.mainContainer}>
       <div className={styles.typeOfService}>
-        <h2>{dummyData.type}</h2>
-        {/* ikonka */}
+        <div>
+          <h2>{announcement.category}</h2>
+          {
+            categories.find(
+              (category) => category.category === announcement.category
+            )?.icon
+          }
+        </div>
+        <div className={styles.xmark}>
+          <FontAwesomeIcon icon={faXmark} />
+        </div>
       </div>
       <div className={styles.signs}>
         <ul>
-          <li className={styles.sign} key={dummyData.howMany}>
-            For: {dummyData.howMany} people
+          <li className={styles.sign} key={announcement.for}>
+            For: {announcement.for} people
           </li>
-          <li className={styles.sign} key={dummyData.from}>
-            From: {dummyData.from}
+          <li className={styles.sign} key={announcement.from}>
+            From: {announcement.from}
           </li>
-          <li className={styles.sign} key={dummyData.to}>
-            To: {dummyData.to}
+          <li className={styles.sign} key={announcement.to}>
+            To: {announcement.to}
           </li>
-          <li className={styles.sign} key={dummyData.when}>
-            When: {dummyData.when}
-          </li>
-          <li className={styles.sign} key={dummyData.time}>
-            Time: {dummyData.time}
+          <li className={styles.sign} key={announcement.time}>
+            When: {announcement.time}
           </li>
         </ul>
       </div>
+      <div className={styles.description}>{announcement.desc}</div>
       <div className={styles.buttons}>
-        {/* przyciski 2 */}
-        {/* przyciski 2 */}
+        <a href={`tel:${announcement.phone}`}>
+          <span className={styles.button}>
+            <FontAwesomeIcon icon={faPhone} />
+            <h3>Call</h3>
+          </span>
+        </a>
+        <a href={`sms:${announcement.phone}`}>
+          <span className={styles.button}>
+            <FontAwesomeIcon icon={faMessage} />
+            <h3>Send a message</h3>
+          </span>
+        </a>
       </div>
     </div>
+  ) : (
+    <CircularProgress />
   );
 };

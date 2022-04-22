@@ -1,3 +1,3 @@
 export const Announcements = () => {
-    return <div>asd</div>
-}
+  return <div>asd</div>;
+};
