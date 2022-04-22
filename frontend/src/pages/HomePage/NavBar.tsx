@@ -8,7 +8,6 @@ import MenuItem from '@mui/material/MenuItem';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {  Button, createTheme, ThemeProvider } from '@mui/material';
 import { IconButton } from '@mui/material';
-// import { useState } from 'react';
 import React from 'react';
 
 const theme = createTheme({
@@ -23,7 +22,7 @@ const theme = createTheme({
 })
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const settingLogout = ['Registe', 'Login']
+const settingLogout = ['Register', 'Login']
 
 const Navbar: React.FC = () => {
   
