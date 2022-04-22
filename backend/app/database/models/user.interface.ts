@@ -1,4 +1,8 @@
 interface User {
+<<<<<<< HEAD
+=======
+  _id: string;
+>>>>>>> main
   firstName: string;
   lastName: string;
   email: string;
@@ -6,6 +10,10 @@ interface User {
   phone: string;
   city: string;
   role: string;
+<<<<<<< HEAD
+=======
+  areaCode: string;
+>>>>>>> main
   verifiedByEmail: boolean;
   verifiedByAdmin: boolean;
 }

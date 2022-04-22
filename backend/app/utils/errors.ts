@@ -9,6 +9,16 @@ export abstract class CustomError extends Error {
   }
 }
 
+export class UnautorizedAccessError extends CustomError {
+  public static readonly Msg =
+    'A user with the given id does not have permission to access.';
+  public static readonly HttpStatus = HttpStatusCodes.UNAUTHORIZED;
+
+  constructor() {
+    super(UnautorizedAccessError.Msg, UnautorizedAccessError.HttpStatus);
+  }
+}
+
 //* Examples of errors
 /*
 export class ParamMissingError extends CustomError {
