@@ -1,7 +1,7 @@
 const routes = {
   home: '/',
-  category: "/category",
-  announcements: "/announcements"
+  category: '/category',
+  singleAnnouncement: '/announcements/:id'
 };
 
 export default routes;
