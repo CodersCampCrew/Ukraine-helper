@@ -12,7 +12,7 @@ export interface DataStoredInToken {
 }
 
 export const generateAuthToken = (user: User): TokenData => {
-  const expiresAt = DateTime.utc().plus({hour: 1}).toJSDate();
+  const expiresAt = DateTime.utc().plus({ hour: 1 }).toJSDate();
   const secret = process.env.JWT_SECRET;
   const dataStoredInToken: DataStoredInToken = {
     id: user._id,
@@ -21,7 +21,9 @@ export const generateAuthToken = (user: User): TokenData => {
   };
 
   return {
-    token: jwt.sign(dataStoredInToken, secret as string, { expiresIn: 60*60 }),
+    token: jwt.sign(dataStoredInToken, secret as string, {
+      expiresIn: 60 * 60
+    }),
     expiresIn: expiresAt
   };
 };

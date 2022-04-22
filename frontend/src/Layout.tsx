@@ -4,10 +4,11 @@ import HomePage from './pages/HomePage';
 
 const Layout = () => {
   return (
-  <>
-  <HomePage/>
-  <Outlet />;
-  </>)
+    <>
+      <HomePage />
+      <Outlet />;
+    </>
+  );
 };
 
 export default Layout;

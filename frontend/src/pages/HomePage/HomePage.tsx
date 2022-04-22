@@ -1,5 +1,5 @@
-import Navbar from "./NavBar";
+import Navbar from './NavBar';
 
-const HomePage = () => <Navbar />
+const HomePage = () => <Navbar />;
 
 export default HomePage;
