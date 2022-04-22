@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Category } from "./pages/category/Category"
-import { Announcements } from "./pages/announcements/Announcements";
+import { Category } from './pages/category/Category';
+import { Announcements } from './pages/announcements/Announcements';
 
 import Layout from './Layout';
 import routes from './routes';

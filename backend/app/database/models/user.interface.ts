@@ -1,13 +1,13 @@
 interface User {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    phone: string,
-    city: string,
-    role: string,
-    verifiedByEmail: boolean,
-    verifiedByAdmin: boolean
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  phone: string;
+  city: string;
+  role: string;
+  verifiedByEmail: boolean;
+  verifiedByAdmin: boolean;
 }
 
 export default User;
