@@ -10,6 +10,7 @@ const userSchema = new Schema<User>({
   city: { type: String, required: true },
   role: { type: String, required: true },
   areaCode: { type: String, required: true },
+  emailToken: { type: String },
   verifiedByEmail: { type: Boolean },
   verifiedByAdmin: { type: Boolean }
 });
