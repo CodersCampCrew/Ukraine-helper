@@ -7,6 +7,5 @@ export const NeedButton = styled(Button)(() => ({
   border: 'none',
   width: '90%',
   height: '16em',
-  marginBottom: "0.5rem"
-  
+  margin: "0.5rem",  
 }));

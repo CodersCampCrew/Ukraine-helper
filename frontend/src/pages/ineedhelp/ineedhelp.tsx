@@ -5,7 +5,11 @@ import {NeedButton} from './components/Button'
 export const IneedHelp: React.FC = () => {
 
   return (
-    <Grid container direction="column" justifyContent = "center">
+    <Grid container
+    spacing={0}
+    direction="column"
+    alignItems="center"
+    justifyContent="center">
             <NeedButton onClick={()=>{alert('clicked')}}> I Need Help </NeedButton>
             <NeedButton onClick={()=>{alert('clicked')}}> I Can Help </NeedButton>
             <div> I already have an account: </div>
