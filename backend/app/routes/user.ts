@@ -1,3 +1,4 @@
+import User from '@database/models/user.model';
 import { Router } from 'express';
 import * as userController from '../controllers/user.controller';
 
@@ -8,3 +9,5 @@ userRouter.post('/registerRefugee', userController.registerRefugee);
 userRouter.post('/registerVolunteer', userController.registerVolunteer);
 
 userRouter.post('/login', userController.login);
+
+userRouter.get('/verify-email', userController.verifyEmail);

@@ -5,6 +5,10 @@ import bcrypt from 'bcryptjs';
 import registerUserValidation from '@database/transferObjects/user.dto';
 import { createCookie, generateAuthToken } from '@utils/jwt.utils';
 import { roles } from '@configs/globals';
+import crypto from 'crypto';
+import nodemailer from 'nodemailer';
+import { transporter } from '@services/nodemailer';
+import RequestWithUser from '@utils/requestwithcontext.interface';
 
 export const userRouter = Router();
 
@@ -33,14 +37,33 @@ const register = (role: roles) => async (req: Request, res: Response) => {
     city: req.body.city,
     role,
     areaCode: req.body.areaCode,
-    verifiedByEmail: req.body.verifiedByEmail,
-    verifiedByAdmin: req.body.verifiedByAdmin
+    emailToken: crypto.randomBytes(24).toString('hex'),
+    verifiedByEmail: req.body.verifiedByEmail=false,
+    verifiedByAdmin: req.body.verifiedByAdmin=false
   });
 
   try {
     const savedUser = await user.save();
     savedUser.password = undefined as any;
-    res.status(StatusCodes.CREATED).send(savedUser);
+
+    let mailOptions = {
+      from: `UKH Admin - ${process.env.MAIL_USER}`,
+      to: user.email,
+      subject: 'UKH - Confirm email account',
+      html: `<h2> Hi ${user.firstName}! Thanks for registering on our site </h2>
+             <h4> Please verify your mail to continue...</h4>
+             <a href="http://${req.headers.host}/user/verify-email?token=${user.emailToken}">Verify Your Email!</a>`
+            
+  }
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+    console.log('Verification email has been sent to your email account');
+  }
+});
+
+    res.status(StatusCodes.CREATED).send(savedUser).redirect('/user/login');
   } catch (err) {
     res.status(StatusCodes.SERVICE_UNAVAILABLE).send(err);
   }
@@ -48,6 +71,26 @@ const register = (role: roles) => async (req: Request, res: Response) => {
 
 export const registerVolunteer = register('volunteer');
 export const registerRefugee = register('refugee');
+
+export const verifyEmail = async (req: Request, res: Response) => {
+  try {
+      const token = req.query.token;
+      const user = await User.findOne({ emailToken: emailToken });
+      if (user) {
+        user.emailToken = null;
+        user.verifiedByEmail = true;
+        await user.save()
+        res.redirect('/user/login');
+      } else {
+        res.redirect('/user/register');
+        console.log('email is not verified');        
+      }
+    } 
+    catch (err) {
+      console.log(err)
+}}
+
+
 
 export const login = async (req: Request, res: Response) => {
   const user = await User.findOne({ email: req.body.email });
@@ -67,4 +110,4 @@ export const login = async (req: Request, res: Response) => {
     expires: TokenData.expiresIn
   });
   res.send('You are logged in');
-};
+}

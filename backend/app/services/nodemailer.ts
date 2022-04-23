@@ -4,22 +4,24 @@ import dotenv from 'dotenv';
 
 
 export let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-        type: "OAuth2",
-        user: process.env.MAIL_USER,
-        
+       user: process.env.MAIL_USER,
+       pass: process.env.MAIL_PASSWORD 
     },
-});
-
-transporter.set("oauth2_provision_cv", (user: string, renew: boolean, callback:string) => {
-    let accessToken = userTokens[user];
-    if(!accessToken) {
-        return callback(new Error("Unknown user"));
-    } else {
-        return callback(null, accessToken);
+    tls: {
+        rejectUnauthorized: false
     }
-
 });
+
+
+
+// transporter.set("oauth2_provision_cv", (user: string, renew: boolean, callback:string) => {
+//     let accessToken = userTokens[user];
+//     if(!accessToken) {
+//         return callback(new Error("Unknown user"));
+//     } else {
+//         return callback(null, accessToken);
+//     }
+
+// });
