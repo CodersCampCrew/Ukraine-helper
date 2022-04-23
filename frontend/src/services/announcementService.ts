@@ -4,7 +4,6 @@ const announcementService = {
     const data = await serverAPI.get({
       url: `ad/${id}`
     });
-    console.log(data);
     return data;
   }
 };

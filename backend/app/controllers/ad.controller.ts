@@ -115,7 +115,6 @@ export const getAd = async (req: RequestWithUser, res: Response) => {
     let data: any = await AdModel.findById(id);
     const user: any = await User.findById(data.createdBy as string);
     data = { ...data, phone: user.phone };
-    console.log(data);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error });

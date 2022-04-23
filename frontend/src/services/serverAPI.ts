@@ -2,7 +2,6 @@ import axios from 'axios';
 const axiosInstance = axios.create({ baseURL: 'http://localhost:5000/api/' });
 const serverAPI = {
   async get({ url }: { url: string }) {
-    console.log(axiosInstance.get(url));
     const { data } = await axiosInstance.get(url);
     return data;
   },
