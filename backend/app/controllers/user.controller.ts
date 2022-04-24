@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import registerUserValidation from '@database/transferObjects/user.dto';
-import { createCookie, generateAuthToken } from '@utils/jwt.utils';
+import { generateAuthToken } from '@utils/jwt.utils';
 import { roles } from '@configs/globals';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
@@ -38,8 +38,8 @@ const register = (role: roles) => async (req: Request, res: Response) => {
     role,
     areaCode: req.body.areaCode,
     emailToken: crypto.randomBytes(24).toString('hex'),
-    verifiedByEmail: req.body.verifiedByEmail=false,
-    verifiedByAdmin: req.body.verifiedByAdmin=false
+    verifiedByEmail: (req.body.verifiedByEmail = false),
+    verifiedByAdmin: (req.body.verifiedByAdmin = false)
   });
 
   try {
@@ -53,17 +53,16 @@ const register = (role: roles) => async (req: Request, res: Response) => {
       html: `<h2> Hi ${user.firstName}! Thanks for registering on our site </h2>
              <h4> Please verify your mail to continue...</h4>
              <a href="http://${req.headers.host}/user/verify-email?token=${user.emailToken}">Verify Your Email!</a>`
-            
-  }
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-    } else {
-    console.log('Verification email has been sent to your email account');
-  }
-});
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Verification email has been sent to your email account');
+      }
+    });
 
-    res.status(StatusCodes.CREATED).send(savedUser).redirect('/user/login');
+    res.status(StatusCodes.CREATED).send(savedUser);
   } catch (err) {
     res.status(StatusCodes.SERVICE_UNAVAILABLE).send(err);
   }
@@ -74,23 +73,19 @@ export const registerRefugee = register('refugee');
 
 export const verifyEmail = async (req: Request, res: Response) => {
   try {
-      const token = req.query.token;
-      const user = await User.findOne({ emailToken: emailToken });
-      if (user) {
-        user.emailToken = null;
-        user.verifiedByEmail = true;
-        await user.save()
-        res.redirect('/user/login');
-      } else {
-        res.redirect('/user/register');
-        console.log('email is not verified');        
-      }
-    } 
-    catch (err) {
-      console.log(err)
-}}
-
-
+    const token = req.params.token;
+    const user = await User.findOne({ emailToken: token });
+    if (user && !user.verifiedByEmail) {
+      user.verifiedByEmail = true;
+      await user.save();
+      res.status(StatusCodes.OK).send();
+    } else {
+      res.status(StatusCodes.BAD_REQUEST).json({msg: "Email already verfied or none existing" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const login = async (req: Request, res: Response) => {
   const user = await User.findOne({ email: req.body.email });
@@ -104,10 +99,9 @@ export const login = async (req: Request, res: Response) => {
   }
 
   const TokenData = generateAuthToken(user);
-  //res.setHeader('Set-Cookie', [createCookie(TokenData)]);
   res.cookie('Authorization', TokenData.token, {
     httpOnly: true,
     expires: TokenData.expiresIn
   });
   res.send('You are logged in');
-}
+};

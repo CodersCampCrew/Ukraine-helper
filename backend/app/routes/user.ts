@@ -10,4 +10,4 @@ userRouter.post('/registerVolunteer', userController.registerVolunteer);
 
 userRouter.post('/login', userController.login);
 
-userRouter.get('/verify-email', userController.verifyEmail);
+userRouter.post('/verify-email/:token', userController.verifyEmail);

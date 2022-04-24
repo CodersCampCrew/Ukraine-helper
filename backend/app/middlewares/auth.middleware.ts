@@ -22,11 +22,11 @@ export const authMiddleware = async (
     ) as unknown as DataStoredInToken;
     const id = verificationResponse.id;
     const user = await User.findById(id);
-    if (user) {
+    if (user && user.verifiedByEmail) {
       request.user = user;
       next();
     } else {
-      response.status(StatusCodes.UNAUTHORIZED);
+      response.status(StatusCodes.UNAUTHORIZED).send();
     }
   } catch (error) {
     next(new UnautorizedAccessError());
