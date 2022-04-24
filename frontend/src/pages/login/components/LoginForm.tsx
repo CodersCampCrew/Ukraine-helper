@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import { Grid, Button, Link } from '@mui/material';
+import { Grid, Button, Link, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -9,7 +9,11 @@ import {
   InvalidField,
   FormItem
 } from '../../../components';
-import userService from '../../../services/userService';
+
+import { UserContext } from '../../../providers/UserProvider';
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import routes from '../../../routes';
 
 type FormValues = {
   email: string;
@@ -35,14 +39,24 @@ export const LoginForm: React.FC = () => {
     formState: { errors }
   } = useForm<FormValues>({ resolver: yupResolver(schema) });
 
+  const userContext = useContext(UserContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(userContext);
+    if (userContext.state.user) {
+      navigate(routes.home);
+    }
+  }, [userContext.state.user]);
+
   const submitForm: SubmitHandler<FormValues> = async (data) => {
-    const response = userService.login(data);
+    userContext.actions.login(data);
   };
 
   return (
     <Grid container direction="row" justifyContent="center">
-      <Grid item xs={2}>
-        <p>Login</p>
+      <Grid item >
+      <Typography padding=".5em 0" sx={{fontSize: '2rem'}} >Login</Typography>
       </Grid>
       <Grid item xs={11}>
         <FormPaper>
@@ -68,7 +82,11 @@ export const LoginForm: React.FC = () => {
               />
               <InvalidField>{errors.password?.message}</InvalidField>
             </FormItem>
-            <Link href="/forgot">Forgot your password?</Link>
+            <Grid container direction='column' justifyContent='space-between' alignItems='center' padding='1rem'>
+              <Link href='/register' underline='none' padding='1.5rem'>If you don't have an account, please register</Link>
+              <Link href="/forgot" underline='none' >Forgot your password?</Link>
+            </Grid>
+
             <Grid container justifyContent="space-between">
               <Button variant="outlined">Cancel</Button>
               <Button type="submit" variant="contained">

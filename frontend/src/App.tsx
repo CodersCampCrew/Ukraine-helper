@@ -30,6 +30,7 @@ export const App = () => {
         <Route path={routes.confirm} element={<Confirm />} />
         <Route path={routes.confirmed} element={<Confirmed />} />
         <Route path={routes.login} element={<LoginForm />} />
+        
         <Route path="*" element={<div />} />
       </Route>
     </Routes>
