@@ -25,6 +25,7 @@ export const App = () => {
           path={routes.singleAnnouncement}
           element={<SingleAnnouncement />}
         />
+        <Route path={routes.sample} element={<div />} />
         <Route path={routes.ineedhelp} element={<IneedHelp />} />
         <Route path={routes.register} element={<Register />} />
         <Route path={routes.confirm} element={<Confirm />} />
