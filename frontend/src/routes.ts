@@ -8,7 +8,8 @@ const routes = {
   login: '/login',
   ineedhelp: '/ineedhelp',
   confirm: '/confirm',
-  confirmed: '/confirmed'
+  confirmed: '/confirmed',
+  error404: '/error404'
 };
 
 export default routes;
