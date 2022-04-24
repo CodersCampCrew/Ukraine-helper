@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import { ConfirmDiv } from './components /ConfirmDiv';
+import { ConfirmDiv } from './components/ConfirmDiv';
 
 export const Confirm: React.FC = () => {
   return (
