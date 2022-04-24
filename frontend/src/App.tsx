@@ -10,6 +10,8 @@ import routes from './routes';
 import { Register } from './pages/register/Register';
 import { LoginForm } from './pages/login/components/LoginForm';
 import { IneedHelp } from './pages/ineedhelp/ineedhelp';
+import { Confirm } from './pages/ConfirmPage/Confirm';
+import { Confirmed } from './pages/ComfiredPage/Comfired';
 
 export const App = () => {
   return (
@@ -25,6 +27,8 @@ export const App = () => {
         <Route path={routes.sample} element={<div />} />
         <Route path={routes.ineedhelp} element={<IneedHelp/>} />
         <Route path={routes.register} element={<Register />} />
+        <Route path={routes.confirm} element={<Confirm />} />
+        <Route path={routes.confirmed} element={<Confirmed />} />
         <Route path={routes.login} element={<LoginForm />} />
         <Route path="*" element={<div />} />
       </Route>
