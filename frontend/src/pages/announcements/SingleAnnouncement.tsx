@@ -23,10 +23,10 @@ export const SingleAnnouncement = () => {
     <div className={styles.mainContainer}>
       <div className={styles.typeOfService}>
         <div>
-          <h2>{announcement.category}</h2>
+          <h2>{announcement._doc.category}</h2>
           {
             categories.find(
-              (category) => category.category === announcement.category
+              (category) => category.name === announcement.category
             )?.icon
           }
         </div>
@@ -36,21 +36,63 @@ export const SingleAnnouncement = () => {
       </div>
       <div className={styles.signs}>
         <ul>
-          <li className={styles.sign} key={announcement.for}>
-            For: {announcement.for} people
-          </li>
-          <li className={styles.sign} key={announcement.from}>
-            From: {announcement.from}
-          </li>
-          <li className={styles.sign} key={announcement.to}>
-            To: {announcement.to}
-          </li>
-          <li className={styles.sign} key={announcement.time}>
-            When: {announcement.time}
-          </li>
+          {announcement._doc.properties.for ? (
+            <li className={styles.sign} key={announcement._doc.properties.for}>
+              For: {announcement._doc.properties.for}
+            </li>
+          ) : null}
+          {announcement._doc.properties.from ? (
+            <li className={styles.sign} key={announcement._doc.properties.from}>
+              From: {announcement._doc.properties.from}
+            </li>
+          ) : null}
+          {announcement._doc.properties.to ? (
+            <li className={styles.sign} key={announcement._doc.properties.to}>
+              To: {announcement._doc.properties.to}
+            </li>
+          ) : null}
+          {announcement._doc.properties.time ? (
+            <li className={styles.sign} key={announcement._doc.properties.time}>
+              When: {announcement._doc.properties.time}
+            </li>
+          ) : null}
+          {announcement._doc.properties.closeTo ? (
+            <li
+              className={styles.sign}
+              key={announcement._doc.properties.closeTo}
+            >
+              When: {announcement._doc.properties.closeTo}
+            </li>
+          ) : null}
+          {announcement._doc.properties.available ? (
+            <li
+              className={styles.sign}
+              key={announcement._doc.properties.available}
+            >
+              When: {announcement._doc.properties.available}
+            </li>
+          ) : null}
+          {announcement._doc.properties.availableFrom ? (
+            <li
+              className={styles.sign}
+              key={announcement._doc.properties.availableFrom}
+            >
+              When: {announcement._doc.properties.availableFrom}
+            </li>
+          ) : null}
+          {announcement._doc.properties.description ? (
+            <li
+              className={styles.sign}
+              key={announcement._doc.properties.description}
+            >
+              When: {announcement._doc.properties.description}
+            </li>
+          ) : null}
         </ul>
       </div>
-      <div className={styles.description}>{announcement.desc}</div>
+      <div className={styles.description}>
+        {announcement._doc.properties.desc}
+      </div>
       <div className={styles.buttons}>
         <a href={`tel:${announcement.phone}`}>
           <span className={styles.button}>
