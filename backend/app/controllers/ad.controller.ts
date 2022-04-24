@@ -26,7 +26,7 @@ export const transport = async (req: Request, res: Response) => {
   }
 };
 
-export const pernamentStay = async (req: Request, res: Response) => {
+export const permanentStay = async (req: Request, res: Response) => {
   try {
     const permanentStay = await AdModel.find({ category: 'permanentStay' });
     res.status(200).json(permanentStay);

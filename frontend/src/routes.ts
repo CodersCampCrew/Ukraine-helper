@@ -1,6 +1,7 @@
 const routes = {
   home: '/',
   category: '/category',
+  selectedCategory: '/category/:type',
   singleAnnouncement: '/announcements/:id',
   announcements: '/announcements',
   sample: '/sample',

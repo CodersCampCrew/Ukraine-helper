@@ -10,7 +10,7 @@ adRouter.get('/all', adController.allAd);
 
 adRouter.get('/transport', adController.transport);
 
-adRouter.get('/pernamentstay', adController.pernamentStay);
+adRouter.get('/permanentstay', adController.permanentStay);
 
 adRouter.get('/temporarystay', adController.temporaryStay);
 

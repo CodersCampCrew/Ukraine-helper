@@ -12,6 +12,7 @@ import { IneedHelp } from './pages/ineedhelp/ineedhelp';
 import { Confirm } from './pages/ConfirmPage/Confirm';
 import { Confirmed } from './pages/ComfiredPage/Comfired';
 import { Error404 } from './pages/404page/404page';
+import { SelectedCategory } from './pages/selectedCategoryPage/SelectedCategory';
 
 export const App = () => {
   return (
@@ -19,6 +20,7 @@ export const App = () => {
       <Route path={routes.home} element={<Layout />}>
         <Route index element={<div />} />
         <Route path={routes.category} element={<Category />} />
+        <Route path={routes.selectedCategory} element={<SelectedCategory />} />
         <Route
           path={routes.singleAnnouncement}
           element={<SingleAnnouncement />}
@@ -30,7 +32,6 @@ export const App = () => {
         <Route path={routes.confirmed} element={<Confirmed />} />
         <Route path={routes.login} element={<LoginForm />} />
         <Route path={routes.error404} element={<Error404 />} />
-        <Route path="*" element={<div />} />
       </Route>
     </Routes>
   );

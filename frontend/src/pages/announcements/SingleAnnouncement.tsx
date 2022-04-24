@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { categories } from '../../assets/categories';
 import styles from './SingleAnnouncement.module.css';
+import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faMessage, faXmark } from '@fortawesome/free-solid-svg-icons';
 import announcementService from '../../services/announcementService';
-import { useParams } from 'react-router-dom';
+
 import { CircularProgress } from '@mui/material';
 
 export const SingleAnnouncement = () => {
