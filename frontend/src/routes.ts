@@ -5,7 +5,11 @@ const routes = {
   announcements: '/announcements',
   sample: '/sample',
   register: '/register',
-  login: '/login'
+  login: '/login',
+  ineedhelp: '/ineedhelp',
+  confirm: '/confirm',
+  confirmed: '/confirmed',
+  error404: '/error404'
 };
 
 export default routes;

@@ -8,6 +8,7 @@ interface User {
   city: string;
   role: string;
   areaCode: string;
+  emailToken: string;
   verifiedByEmail: boolean;
   verifiedByAdmin: boolean;
 }
