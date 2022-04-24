@@ -20,5 +20,5 @@
     },
     "useUnknownInCatchVariables": false
   },
-  "include": ["app/**/*.ts", "tests/**/*.ts", "build.ts"]
+  "include": ["app/**/*.ts", "tests/**/*.ts", "app/swagger.js", "build.ts"]
 }

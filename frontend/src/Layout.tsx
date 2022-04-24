@@ -1,14 +1,15 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import Navbar from './pages/HomePage/NavBar';
+import { IneedHelp } from './pages/ineedhelp/ineedhelp';
 
 const Layout = () => {
   return (
-    <>
-      <HomePage />
-      <Outlet />;
-    </>
-  );
+  <>
+  <Navbar/>
+  <IneedHelp/>
+  <Outlet />;
+  </>)
 };
 
 export default Layout;

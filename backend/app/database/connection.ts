@@ -3,8 +3,4 @@ import 'dotenv/config';
 
 const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH } = process.env;
 
-mongoose
-  .connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`)
-  .catch((error) => {
-    console.log(error);
-  });
+mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`);

@@ -1,4 +1,6 @@
+import { Ad } from '@database/models/ad.interface';
 import AdModel from '@database/models/ad.model';
+import User from '@database/models/user.model';
 import RequestWithUser from '@utils/requestwithcontext.interface';
 import express, { NextFunction, Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
@@ -104,5 +106,18 @@ export const createAd = async (req: RequestWithUser, res: Response) => {
   } catch (error) {
     res.status(422).json({ message: error.message });
     console.log(error);
+  }
+};
+
+export const getAd = async (req: RequestWithUser, res: Response) => {
+  const id = req.params.id;
+  try {
+    let data: any = await AdModel.findById(id);
+    const user: any = await User.findById(data.createdBy as string);
+    data = { ...data, phone: user.phone };
+    console.log(data);
+    res.json(data);
+  } catch (error) {
+    res.status(400).json({ error: error });
   }
 };

@@ -16,7 +16,7 @@
          await copy('.env', './dist/.env');
          await copy('swagger.js', './dist/swagger.js');
          // Copy back-end files
-         await exec('tsc --build tsconfig.json', './')
+         await exec('tsc --build tsconfig.json', './');
      } catch (err) {
          logger.err(err);
      }

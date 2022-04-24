@@ -21,3 +21,5 @@ adRouter.get('/electronic', adController.electronic);
 adRouter.get('/legalassistance', adController.legalAssistance);
 
 adRouter.get('/medicalassistance', adController.medicalAssistance);
+
+adRouter.get('/:id', adController.getAd);

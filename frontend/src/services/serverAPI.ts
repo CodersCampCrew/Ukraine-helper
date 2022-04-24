@@ -1,12 +1,16 @@
 import axios from 'axios';
-
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:5000/api/',
+  withCredentials: true
+});
 const serverAPI = {
   async get({ url }: { url: string }) {
-    const { data } = await axios.get(url);
+    console.log(axiosInstance.get(url));
+    const { data } = await axiosInstance.get(url);
     return data;
   },
   async post({ url, data }: { url: string; data: {} }) {
-    const { data: fetchedData } = await axios.post(url, data);
+    const { data: fetchedData } = await axiosInstance.post(url, data);
     return fetchedData;
   }
 };
