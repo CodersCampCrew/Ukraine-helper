@@ -6,6 +6,7 @@
     "strict": true,
     "baseUrl": "./",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
@@ -19,5 +20,5 @@
     },
     "useUnknownInCatchVariables": false
   },
-  "include": ["app/**/*.ts", "tests/**/*.ts"]
+  "include": ["app/**/*.ts", "tests/**/*.ts", "build.ts"]
 }

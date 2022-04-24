@@ -11,6 +11,8 @@ import { CustomError } from '@utils/errors';
 import { port, serverStartMsg } from '@configs/server';
 import cookieParser from 'cookie-parser';
 import './database/connection';
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from './swagger-output.json';
 
 const app = express();
 
@@ -30,6 +32,7 @@ app.use(morgan('dev'));
 
 // Add api router
 app.use('/api', apiRouter);
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Error handling
 app.use(
