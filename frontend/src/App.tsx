@@ -12,6 +12,7 @@ import { LoginForm } from './pages/login/components/LoginForm';
 import { IneedHelp } from './pages/ineedhelp/ineedhelp';
 import { Confirm } from './pages/ConfirmPage/Confirm';
 import { Confirmed } from './pages/ComfiredPage/Comfired';
+import { Error404 } from './pages/404page/404page';
 
 export const App = () => {
   return (
@@ -30,7 +31,7 @@ export const App = () => {
         <Route path={routes.confirm} element={<Confirm />} />
         <Route path={routes.confirmed} element={<Confirmed />} />
         <Route path={routes.login} element={<LoginForm />} />
-
+        <Route path={routes.error404} element={<Error404 />} />
         <Route path="*" element={<div />} />
       </Route>
     </Routes>
