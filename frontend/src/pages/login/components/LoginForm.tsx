@@ -12,7 +12,6 @@ import {
 
 import { UserContext } from '../../../providers/UserProvider';
 import { useContext, useEffect } from 'react';
-import { Email } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../../routes';
 
