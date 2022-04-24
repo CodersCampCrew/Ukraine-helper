@@ -20,11 +20,11 @@ export const App = () => {
       <Route path={routes.home} element={<Layout />}>
         <Route index element={<div />} />
         <Route path={routes.category} element={<Category />} />
+        <Route path={routes.announcements} element={<Announcements />} />
         <Route
           path={routes.singleAnnouncement}
           element={<SingleAnnouncement />}
         />
-        <Route path={routes.announcements} element={<Announcements />} />
         <Route path={routes.sample} element={<div />} />
         <Route path={routes.ineedhelp} element={<IneedHelp />} />
         <Route path={routes.register} element={<Register />} />
