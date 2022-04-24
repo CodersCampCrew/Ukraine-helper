@@ -25,12 +25,12 @@ export const App = () => {
         />
         <Route path={routes.announcements} element={<Announcements />} />
         <Route path={routes.sample} element={<div />} />
-        <Route path={routes.ineedhelp} element={<IneedHelp/>} />
+        <Route path={routes.ineedhelp} element={<IneedHelp />} />
         <Route path={routes.register} element={<Register />} />
         <Route path={routes.confirm} element={<Confirm />} />
         <Route path={routes.confirmed} element={<Confirmed />} />
         <Route path={routes.login} element={<LoginForm />} />
-        
+
         <Route path="*" element={<div />} />
       </Route>
     </Routes>

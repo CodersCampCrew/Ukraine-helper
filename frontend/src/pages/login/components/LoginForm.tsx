@@ -43,20 +43,23 @@ export const LoginForm: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(userContext);
     if (userContext.state.user) {
       navigate(routes.home);
     }
   }, [userContext.state.user]);
 
   const submitForm: SubmitHandler<FormValues> = async (data) => {
+    userContext.state.isLoading = true
     userContext.actions.login(data);
+    userContext.state.isLoading = false
   };
 
   return (
     <Grid container direction="row" justifyContent="center">
-      <Grid item >
-      <Typography padding=".5em 0" sx={{fontSize: '2rem'}} >Login</Typography>
+      <Grid item>
+        <Typography padding=".5em 0" sx={{ fontSize: '2rem' }}>
+          Login
+        </Typography>
       </Grid>
       <Grid item xs={11}>
         <FormPaper>
@@ -82,9 +85,19 @@ export const LoginForm: React.FC = () => {
               />
               <InvalidField>{errors.password?.message}</InvalidField>
             </FormItem>
-            <Grid container direction='column' justifyContent='space-between' alignItems='center' padding='1rem'>
-              <Link href='/register' underline='none' padding='1.5rem'>If you don't have an account, please register</Link>
-              <Link href="/forgot" underline='none' >Forgot your password?</Link>
+            <Grid
+              container
+              direction="column"
+              justifyContent="space-between"
+              alignItems="center"
+              padding="1rem"
+            >
+              <Link href="/register" underline="none" padding="1.5rem">
+                If you don't have an account, please register
+              </Link>
+              <Link href="/forgot" underline="none">
+                Forgot your password?
+              </Link>
             </Grid>
 
             <Grid container justifyContent="space-between">
