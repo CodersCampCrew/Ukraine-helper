@@ -11,7 +11,6 @@ let navigate = useNavigate();
     direction="column"
     alignItems="center"
     justifyContent="center">
-            <p>Registration</p>
             <NeedButton onClick={()=>{navigate(routes.announcements)}}> I Need Help </NeedButton>
             <NeedButton onClick={()=>{navigate(routes.register)}}> I Can Help </NeedButton>
             <div> I already have an account: </div>

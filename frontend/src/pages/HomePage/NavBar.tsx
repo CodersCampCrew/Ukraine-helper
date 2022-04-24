@@ -11,7 +11,7 @@ import { IconButton } from '@mui/material';
 import React, { useContext } from 'react';
 import { UserContext } from '../../providers/UserProvider';
 import { useNavigate } from 'react-router-dom';
-import routes from '../../routes'
+import routes from '../../routes';
 
 const theme = createTheme({
   palette: {
@@ -23,8 +23,6 @@ const theme = createTheme({
     }
   }
 });
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar: React.FC = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -38,9 +36,15 @@ const Navbar: React.FC = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const loginPageLink = routes.login
-  const userContext = useContext(UserContext)
-  const navigate = useNavigate()
+
+  const userContext = useContext(UserContext);
+  const isLogin: boolean = userContext.state.isLoggedIn;
+
+  const logoutHandler = () => {
+    userContext.actions.logout();
+  };
+
+  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
@@ -48,60 +52,82 @@ const Navbar: React.FC = () => {
         <AppBar position="static" sx={{ padding: '.5em' }}>
           <Toolbar>
             <Typography component="div" sx={{ flexGrow: 1 }}>
-            <Link href='/'><Button>
+              <Button
+                onClick={() => {
+                  navigate(routes.home);
+                }}
+              >
                 <Typography component="div" sx={{ flexGrow: 1 }}>
                   <Typography
                     variant="h6"
                     component="p"
-                    sx={{ fontSize: 18, color: '#3B7BDC', fontWeight: 'bold' }}
+                    sx={{
+                      fontSize: 18,
+                      color: '#3B7BDC',
+                      fontWeight: 'bold'
+                    }}
                   >
                     UKRAINE
                   </Typography>
                   <Typography
                     variant="h6"
                     component="p"
-                    sx={{ fontSize: 18, color: '#FCDA30', fontWeight: 'bold' }}
+                    sx={{
+                      fontSize: 18,
+                      color: '#FCDA30',
+                      fontWeight: 'bold'
+                    }}
                   >
                     HELPER
                   </Typography>
                 </Typography>
-              </Button></Link>
-              
+              </Button>
             </Typography>
-            {userContext.state.user ? <Box>
-              <Tooltip title="Open settings">
-                <IconButton
-                  size="large"
-                  color="secondary"
-                  onClick={handleOpenUserMenu}
-                  sx={{ p: 0 }}
+            {isLogin && (
+              <Box>
+                <Tooltip title="Open settings">
+                  <IconButton
+                    size="large"
+                    color="secondary"
+                    onClick={handleOpenUserMenu}
+                    sx={{ p: 0 }}
+                  >
+                    <SettingsIcon fontSize="large" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
                 >
-                  <SettingsIcon fontSize="large" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem onClick={logoutHandler}>
+                    <Typography textAlign="center">Logout</Typography>
                   </MenuItem>
-                ))}
-              </Menu>
-            </Box> : <Link underline='none' sx={{color: '#fff'}} href='/login' >Login</Link>}
+                </Menu>
+              </Box>
+            )}
+            {!isLogin && (
+              <Link
+                underline="none"
+                sx={{ color: '#fff' }}
+                onClick={() => {
+                  navigate(routes.login);
+                }}
+              >
+                Login
+              </Link>
+            )}
           </Toolbar>
         </AppBar>
       </Box>

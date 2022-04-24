@@ -18,7 +18,7 @@ export const App = () => {
   return (
     <Routes>
       <Route path={routes.home} element={<Layout />}>
-        <Route index element={<div />} />
+        <Route index element={<IneedHelp />} />
         <Route path={routes.category} element={<Category />} />
         <Route path={routes.selectedCategory} element={<SelectedCategory />} />
         <Route
@@ -26,7 +26,7 @@ export const App = () => {
           element={<SingleAnnouncement />}
         />
         <Route path={routes.sample} element={<div />} />
-        <Route path={routes.ineedhelp} element={<IneedHelp />} />
+
         <Route path={routes.register} element={<Register />} />
         <Route path={routes.confirm} element={<Confirm />} />
         <Route path={routes.confirmed} element={<Confirmed />} />

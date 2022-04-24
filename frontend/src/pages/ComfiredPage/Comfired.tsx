@@ -11,7 +11,6 @@ let navigate = useNavigate();
     direction="column"
     alignItems="center"
     justifyContent="center">
-            <p>Registration</p>
             <ConfirmedDiv>Your email address has been confirmed</ConfirmedDiv>
             <Button variant="contained" size="large" onClick={()=>{navigate(routes.login)}}>Log in</Button>
     </Grid>

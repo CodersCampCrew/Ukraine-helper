@@ -7,7 +7,8 @@ import {
   FormInput,
   FormPaper,
   InvalidField,
-  FormItem
+  FormItem,
+  LoadingSpinner
 } from '../../../components';
 
 import { UserContext } from '../../../providers/UserProvider';
@@ -51,6 +52,7 @@ export const LoginForm: React.FC = () => {
   const submitForm: SubmitHandler<FormValues> = async (data) => {
     userContext.state.isLoading = true
     userContext.actions.login(data);
+    userContext.state.isLoggedIn = true;
     userContext.state.isLoading = false
   };
 
@@ -101,10 +103,11 @@ export const LoginForm: React.FC = () => {
             </Grid>
 
             <Grid container justifyContent="space-between">
-              <Button variant="outlined">Cancel</Button>
+              <Button href='/' variant="outlined">Cancel</Button>
               <Button type="submit" variant="contained">
                 Log in
               </Button>
+              {userContext.state.isLoading && <LoadingSpinner/> }  
             </Grid>
           </form>
         </FormPaper>

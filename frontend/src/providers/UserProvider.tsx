@@ -1,5 +1,5 @@
-import React, { useReducer } from 'react';
 import jwtDecode from 'jwt-decode';
+import React, { useReducer } from 'react';
 
 import userService from '../services/userService';
 
@@ -11,6 +11,8 @@ type State = {
   isLoading: boolean;
   user?: User;
   error?: unknown;
+  jwt?: any;
+  isLoggedIn?: any;
 };
 
 type User = {
@@ -25,9 +27,8 @@ type User = {
 type Action =
   | { type: 'login/request' }
   | { type: 'login/success'; user: User }
+  | { type: 'logout' }
   | { type: 'login/failure'; error: unknown };
-
-const initialState: State = { isLoading: false };
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -37,36 +38,46 @@ const reducer = (state: State, action: Action): State => {
       return { isLoading: false, user: action.user };
     case 'login/failure':
       return { isLoading: false, error: action.error };
+    case 'logout':
+      return { isLoading: false };
   }
 };
+
+const token = localStorage.getItem('token');
+
+const initialState: State = { isLoading: false, isLoggedIn: token };
 
 export const UserContext = React.createContext({
   state: initialState,
   actions: {
-    async login({ email, password }: { email: string; password: string }) {}
+    async login({ email, password }: { email: string; password: string }) {},
+    async logout() {}
   }
 });
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   const actions = {
     async login({ email, password }: { email: string; password: string }) {
       dispatch({ type: 'login/request' });
       try {
-        const user = await userService.login({
+        await userService.login({
           email: email,
           password: password
         });
+        const jwt = document.cookie;
+        localStorage.setItem('token', jwt);
+        const decodedJWT: any = jwtDecode(jwt);
+        const { userName }: any = decodedJWT;
 
-        console.log(user);
-
-        dispatch({ type: 'login/success', user });
-        console.log(user);
+        dispatch({ type: 'login/success', user: userName });
       } catch (error) {
-        console.log(error);
         dispatch({ type: 'login/failure', error });
       }
+    },
+    async logout() {
+      dispatch({ type: 'logout' });
+      localStorage.removeItem('token');
     }
   };
 
