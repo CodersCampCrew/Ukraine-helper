@@ -17,7 +17,7 @@ export const SingleAnnouncement = () => {
       setAnnouncement(fetchedAnnouncement);
     };
     getAnnouncement();
-  }, [id]);
+  }, []);
   return announcement ? (
     <div className={styles.mainContainer}>
       <div className={styles.typeOfService}>
