@@ -119,8 +119,9 @@ const Navbar: React.FC = () => {
             )}
             {!isLogin && (
               <Link
+                
                 underline="none"
-                sx={{ color: '#fff' }}
+                sx={{ color: '#fff', cursor: 'pointer' }}
                 onClick={() => {
                   navigate(routes.login);
                 }}

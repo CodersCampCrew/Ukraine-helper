@@ -52,7 +52,6 @@ export const LoginForm: React.FC = () => {
   const submitForm: SubmitHandler<FormValues> = async (data) => {
     userContext.state.isLoading = true
     userContext.actions.login(data);
-    userContext.state.isLoggedIn = true;
     userContext.state.isLoading = false
   };
 

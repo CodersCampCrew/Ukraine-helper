@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Category } from './pages/category/Category';
 import { SingleAnnouncement } from './pages/announcements/SingleAnnouncement';
@@ -13,8 +13,10 @@ import { Confirm } from './pages/ConfirmPage/Confirm';
 import { Confirmed } from './pages/ComfiredPage/Comfired';
 import { Error404 } from './pages/404page/404page';
 import { SelectedCategory } from './pages/selectedCategoryPage/SelectedCategory';
+import { UserContext } from './providers/UserProvider';
 
 export const App = () => {
+  const userContext = useContext(UserContext);
   return (
     <Routes>
       <Route path={routes.home} element={<Layout />}>
@@ -27,11 +29,13 @@ export const App = () => {
         />
         <Route path={routes.sample} element={<div />} />
 
-        <Route path={routes.register} element={<Register />} />
+        {!userContext.state.isLoggedIn && (
+          <Route path={routes.register} element={<Register />} />
+        )}
         <Route path={routes.confirm} element={<Confirm />} />
         <Route path={routes.confirmed} element={<Confirmed />} />
         <Route path={routes.login} element={<LoginForm />} />
-        <Route path={routes.error404} element={<Error404 />} />
+        <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>
   );

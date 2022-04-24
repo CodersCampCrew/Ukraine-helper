@@ -12,6 +12,8 @@ import {
 import userService from '../../../services/userService';
 import { useContext } from 'react';
 import { UserContext } from '../../../providers/UserProvider';
+import { useNavigate } from 'react-router-dom';
+import routes from '../../../routes'
 
 type FormValues = {
   firstName: string;
@@ -67,11 +69,11 @@ export const RegisterForm: React.FC = () => {
   } = useForm<FormValues>({ resolver: yupResolver(schema) });
 
   const userContext = useContext(UserContext);
-
+  const navigate = useNavigate();
   const submitForm: SubmitHandler<FormValues> = async (data) => {
     userContext.state.isLoading = true;
     const response = await userService.register(data);
-    console.log(response)
+    console.log(response);
     userContext.state.isLoading = false;
   };
 
@@ -177,7 +179,9 @@ export const RegisterForm: React.FC = () => {
               </Grid>
             </Grid>
             <Grid container justifyContent="space-between">
-              <Button href="/" variant="outlined">
+              <Button onClick={() => {
+                navigate(routes.home)
+              }} variant="outlined">
                 Cancel
               </Button>
               <Button type="submit" variant="contained">

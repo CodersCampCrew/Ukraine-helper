@@ -13,6 +13,7 @@ type State = {
   error?: unknown;
   jwt?: any;
   isLoggedIn?: any;
+  token?: string;
 };
 
 type User = {
@@ -22,6 +23,7 @@ type User = {
   phone: string;
   address: string;
   jwt: string;
+  token: string;
 };
 
 type Action =
@@ -75,7 +77,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         dispatch({ type: 'login/failure', error });
       }
     },
-    async logout() {
+     async logout() {
       dispatch({ type: 'logout' });
       localStorage.removeItem('token');
     }
