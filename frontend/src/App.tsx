@@ -26,6 +26,7 @@ export const App = () => {
         <Route path={routes.ineedhelp} element={<IneedHelp/>} />
         <Route path={routes.register} element={<Register />} />
         <Route path={routes.login} element={<LoginForm />} />
+        
         <Route path="*" element={<div />} />
       </Route>
     </Routes>

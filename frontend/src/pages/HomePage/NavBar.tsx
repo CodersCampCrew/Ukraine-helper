@@ -6,9 +6,12 @@ import Tooltip from '@mui/material/Tooltip';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Button, createTheme, ThemeProvider } from '@mui/material';
+import { Button, createTheme, Link, ThemeProvider } from '@mui/material';
 import { IconButton } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../providers/UserProvider';
+import { useNavigate } from 'react-router-dom';
+import routes from '../../routes'
 
 const theme = createTheme({
   palette: {
@@ -22,7 +25,6 @@ const theme = createTheme({
 });
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const settingLogout = ['Register', 'Login'];
 
 const Navbar: React.FC = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -36,6 +38,9 @@ const Navbar: React.FC = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const loginPageLink = routes.login
+  const userContext = useContext(UserContext)
+  const navigate = useNavigate()
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,7 +48,7 @@ const Navbar: React.FC = () => {
         <AppBar position="static" sx={{ padding: '.5em' }}>
           <Toolbar>
             <Typography component="div" sx={{ flexGrow: 1 }}>
-              <Button>
+            <Link href='/'><Button>
                 <Typography component="div" sx={{ flexGrow: 1 }}>
                   <Typography
                     variant="h6"
@@ -60,9 +65,10 @@ const Navbar: React.FC = () => {
                     HELPER
                   </Typography>
                 </Typography>
-              </Button>
+              </Button></Link>
+              
             </Typography>
-            <Box>
+            {userContext.state.user ? <Box>
               <Tooltip title="Open settings">
                 <IconButton
                   size="large"
@@ -95,7 +101,7 @@ const Navbar: React.FC = () => {
                   </MenuItem>
                 ))}
               </Menu>
-            </Box>
+            </Box> : <Link underline='none' sx={{color: '#fff'}} href='/login' >Login</Link>}
           </Toolbar>
         </AppBar>
       </Box>

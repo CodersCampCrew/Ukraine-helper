@@ -7,15 +7,18 @@ import { ThemeProvider } from '@mui/material/styles';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { theme } from './theme';
+import { UserProvider } from './providers/UserProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
