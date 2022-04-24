@@ -10,6 +10,8 @@ import {
   FormItem
 } from '../../../components';
 import userService from '../../../services/userService';
+import { useContext } from 'react';
+import { UserContext } from '../../../providers/UserProvider';
 
 type FormValues = {
   firstName: string;
@@ -64,9 +66,10 @@ export const RegisterForm: React.FC = () => {
     formState: { errors }
   } = useForm<FormValues>({ resolver: yupResolver(schema) });
 
+  const userContext = useContext(UserContext)
+
   const submitForm: SubmitHandler<FormValues> = async (data) => {
     const response = userService.register(data);
-    console.log(data)
   };
 
   return (
@@ -171,7 +174,7 @@ export const RegisterForm: React.FC = () => {
             </Grid>
             <Grid container justifyContent="space-between">
               <Button href='/' variant="outlined">Cancel</Button>
-              <Button type="submit" variant="contained">
+              <Button href='/confirm' type="submit" variant="contained">
                 Next
               </Button>
             </Grid>
