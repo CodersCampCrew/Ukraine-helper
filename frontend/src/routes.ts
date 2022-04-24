@@ -6,7 +6,9 @@ const routes = {
   sample: '/sample',
   register: '/register',
   login: '/login',
-  ineedhelp: '/ineedhelp'
+  ineedhelp: '/ineedhelp',
+  confirm: '/confirm',
+  confirmed: '/confirmed'
 };
 
 export default routes;

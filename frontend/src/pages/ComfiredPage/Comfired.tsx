@@ -1,9 +1,9 @@
-import { Grid, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Grid, Button } from '@mui/material';
+import { ConfirmedDiv } from './components/ConfirmedDiv';
 import routes from '../../routes';
-import {NeedButton} from './components/Button'
 
-export const IneedHelp: React.FC = () => {
+export const Confirmed: React.FC = () => {
 let navigate = useNavigate();
   return (
     <Grid container
@@ -12,9 +12,7 @@ let navigate = useNavigate();
     alignItems="center"
     justifyContent="center">
             <p>Registration</p>
-            <NeedButton onClick={()=>{navigate(routes.announcements)}}> I Need Help </NeedButton>
-            <NeedButton onClick={()=>{navigate(routes.register)}}> I Can Help </NeedButton>
-            <div> I already have an account: </div>
+            <ConfirmedDiv>Your email address has been confirmed</ConfirmedDiv>
             <Button variant="contained" size="large" onClick={()=>{navigate(routes.login)}}>Log in</Button>
     </Grid>
   );
