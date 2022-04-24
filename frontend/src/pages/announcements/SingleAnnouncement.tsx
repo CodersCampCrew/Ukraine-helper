@@ -35,18 +35,58 @@ export const SingleAnnouncement = () => {
       </div>
       <div className={styles.signs}>
         <ul>
-          <li className={styles.sign} key={announcement._doc.properties.for}>
-            For: {announcement._doc.properties.for}
-          </li>
-          <li className={styles.sign} key={announcement._doc.properties.from}>
-            From: {announcement._doc.properties.from}
-          </li>
-          <li className={styles.sign} key={announcement._doc.properties.to}>
-            To: {announcement._doc.properties.to}
-          </li>
-          <li className={styles.sign} key={announcement._doc.properties.time}>
-            When: {announcement._doc.properties.time}
-          </li>
+          {announcement._doc.properties.for ? (
+            <li className={styles.sign} key={announcement._doc.properties.for}>
+              For: {announcement._doc.properties.for}
+            </li>
+          ) : null}
+          {announcement._doc.properties.from ? (
+            <li className={styles.sign} key={announcement._doc.properties.from}>
+              From: {announcement._doc.properties.from}
+            </li>
+          ) : null}
+          {announcement._doc.properties.to ? (
+            <li className={styles.sign} key={announcement._doc.properties.to}>
+              To: {announcement._doc.properties.to}
+            </li>
+          ) : null}
+          {announcement._doc.properties.time ? (
+            <li className={styles.sign} key={announcement._doc.properties.time}>
+              When: {announcement._doc.properties.time}
+            </li>
+          ) : null}
+          {announcement._doc.properties.closeTo ? (
+            <li
+              className={styles.sign}
+              key={announcement._doc.properties.closeTo}
+            >
+              When: {announcement._doc.properties.closeTo}
+            </li>
+          ) : null}
+          {announcement._doc.properties.available ? (
+            <li
+              className={styles.sign}
+              key={announcement._doc.properties.available}
+            >
+              When: {announcement._doc.properties.available}
+            </li>
+          ) : null}
+          {announcement._doc.properties.availableFrom ? (
+            <li
+              className={styles.sign}
+              key={announcement._doc.properties.availableFrom}
+            >
+              When: {announcement._doc.properties.availableFrom}
+            </li>
+          ) : null}
+          {announcement._doc.properties.description ? (
+            <li
+              className={styles.sign}
+              key={announcement._doc.properties.description}
+            >
+              When: {announcement._doc.properties.description}
+            </li>
+          ) : null}
         </ul>
       </div>
       <div className={styles.description}>
