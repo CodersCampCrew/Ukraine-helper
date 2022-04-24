@@ -22,10 +22,10 @@ export const SingleAnnouncement = () => {
     <div className={styles.mainContainer}>
       <div className={styles.typeOfService}>
         <div>
-          <h2>{announcement.category}</h2>
+          <h2>{announcement._doc.category}</h2>
           {
             categories.find(
-              (category) => category.category === announcement.category
+              (category) => category.name === announcement.category
             )?.icon
           }
         </div>
@@ -35,21 +35,23 @@ export const SingleAnnouncement = () => {
       </div>
       <div className={styles.signs}>
         <ul>
-          <li className={styles.sign} key={announcement.for}>
-            For: {announcement.for} people
+          <li className={styles.sign} key={announcement._doc.properties.for}>
+            For: {announcement._doc.properties.for}
           </li>
-          <li className={styles.sign} key={announcement.from}>
-            From: {announcement.from}
+          <li className={styles.sign} key={announcement._doc.properties.from}>
+            From: {announcement._doc.properties.from}
           </li>
-          <li className={styles.sign} key={announcement.to}>
-            To: {announcement.to}
+          <li className={styles.sign} key={announcement._doc.properties.to}>
+            To: {announcement._doc.properties.to}
           </li>
-          <li className={styles.sign} key={announcement.time}>
-            When: {announcement.time}
+          <li className={styles.sign} key={announcement._doc.properties.time}>
+            When: {announcement._doc.properties.time}
           </li>
         </ul>
       </div>
-      <div className={styles.description}>{announcement.desc}</div>
+      <div className={styles.description}>
+        {announcement._doc.properties.desc}
+      </div>
       <div className={styles.buttons}>
         <a href={`tel:${announcement.phone}`}>
           <span className={styles.button}>
