@@ -11,7 +11,7 @@ const registerUserValidation = (data: User) => {
     lastName: Joi.string().min(3).required(),
     city: Joi.string().min(3).required(),
     email: Joi.string().min(6).required().email(),
-    password: JoiPassword.string().minOfLowercase(6).noWhiteSpaces(),
+    password: JoiPassword.string().min(6).noWhiteSpaces(),
     phone: Joi.string()
       .length(9)
       .pattern(/^[0-9]+$/)

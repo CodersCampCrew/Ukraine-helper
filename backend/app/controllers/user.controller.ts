@@ -100,7 +100,6 @@ export const login = async (req: Request, res: Response) => {
 
   const TokenData = generateAuthToken(user);
   res.cookie('Authorization', TokenData.token, {
-    httpOnly: true,
     expires: TokenData.expiresIn
   });
   res.send('You are logged in');
