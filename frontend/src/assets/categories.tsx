@@ -12,16 +12,16 @@ import {
 
 export const categories = [
   {
-    name: 'Permament stay',
+    name: 'permanent stay',
     icon: <FontAwesomeIcon icon={faBuilding} />,
-    route: '/category/permament',
-    category: 'permament'
+    route: '/category/permanentstay',
+    category: 'permanentstay'
   },
   {
     name: 'Temporary stay',
     icon: <FontAwesomeIcon icon={faBuilding} />,
-    route: 'category/temporary',
-    category: 'temporary'
+    route: 'category/temporarystay',
+    category: 'temporarystay'
   },
   {
     name: 'Transport',
@@ -30,16 +30,10 @@ export const categories = [
     category: 'transport'
   },
   {
-    name: 'Sleepover',
-    icon: <FontAwesomeIcon icon={faBed} />,
-    route: 'category/sleepover',
-    category: 'sleepover'
-  },
-  {
     name: 'Medical and psychological assistance',
     icon: <FontAwesomeIcon icon={faSyringe} />,
-    route: 'category/medical',
-    category: 'medical'
+    route: 'category/medicalassistance',
+    category: 'medicalassistance'
   },
   {
     name: 'Electronic',
@@ -50,13 +44,13 @@ export const categories = [
   {
     name: 'Legal assistance',
     icon: <FontAwesomeIcon icon={faSection} />,
-    route: 'category/legal_assistance',
-    category: 'legal'
+    route: 'category/legalassistance',
+    category: 'legalassistance'
   },
   {
     name: 'For kids',
     icon: <FontAwesomeIcon icon={faChildren} />,
-    route: 'category/for_kids',
-    category: 'for_kids'
+    route: 'category/forkids',
+    category: 'forkids'
   }
 ];

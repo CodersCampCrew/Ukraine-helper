@@ -5,7 +5,6 @@ const axiosInstance = axios.create({
 });
 const serverAPI = {
   async get({ url }: { url: string }) {
-    console.log(axiosInstance.get(url));
     const { data } = await axiosInstance.get(url);
     return data;
   },

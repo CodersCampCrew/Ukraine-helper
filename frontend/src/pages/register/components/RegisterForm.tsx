@@ -12,6 +12,8 @@ import {
 import userService from '../../../services/userService';
 import { useContext } from 'react';
 import { UserContext } from '../../../providers/UserProvider';
+import { useNavigate } from 'react-router-dom';
+import routes from '../../../routes'
 
 type FormValues = {
   firstName: string;
@@ -66,19 +68,23 @@ export const RegisterForm: React.FC = () => {
     formState: { errors }
   } = useForm<FormValues>({ resolver: yupResolver(schema) });
 
-  const userContext = useContext(UserContext)
-
+  const userContext = useContext(UserContext);
+  const navigate = useNavigate();
   const submitForm: SubmitHandler<FormValues> = async (data) => {
-    const response = userService.register(data);
+    userContext.state.isLoading = true;
+    const response = await userService.register(data);
+    console.log(response);
+    userContext.state.isLoading = false;
   };
 
   return (
     <Grid container direction="row" justifyContent="center">
-      <Grid item alignItems='center'>
-        <Typography padding=".5em 0" sx={{fontSize: '2rem'}} >Registration</Typography>
-        {/* <p>Registration</p> */}
+      <Grid item alignItems="center">
+        <Typography padding=".5em 0" sx={{ fontSize: '2rem' }}>
+          Registration
+        </Typography>
       </Grid>
-      <Grid item padding='.5rem 0' xs={11}>
+      <Grid item padding=".5rem 0" xs={11}>
         <FormPaper>
           <form onSubmit={handleSubmit(submitForm)}>
             <Grid
@@ -87,7 +93,7 @@ export const RegisterForm: React.FC = () => {
               justifyContent="space-between"
               sx={{ margin: 'auto 0' }}
             >
-              <Grid item padding='.5rem 0' xs={5} sm={5} md={4}>
+              <Grid item padding=".5rem 0" xs={5} sm={5} md={4}>
                 <FormItem>
                   <FormInput
                     id="firstName"
@@ -99,7 +105,7 @@ export const RegisterForm: React.FC = () => {
                   <InvalidField>{errors.firstName?.message}</InvalidField>
                 </FormItem>
               </Grid>
-              <Grid item padding='.5rem 0' xs={5} sm={5} md={4}>
+              <Grid item padding=".5rem 0" xs={5} sm={5} md={4}>
                 <FormItem>
                   <FormInput
                     id="lastName"
@@ -111,7 +117,7 @@ export const RegisterForm: React.FC = () => {
                   <InvalidField>{errors.lastName?.message}</InvalidField>
                 </FormItem>
               </Grid>
-              <Grid item padding='.5rem 0' xs={12} sm={5} md={4}>
+              <Grid item padding=".5rem 0" xs={12} sm={5} md={4}>
                 <FormItem>
                   <FormInput
                     id="city"
@@ -123,7 +129,7 @@ export const RegisterForm: React.FC = () => {
                   <InvalidField>{errors.city?.message}</InvalidField>
                 </FormItem>
               </Grid>
-              <Grid item padding='.5rem 0' xs={12} sm={5} md={4}>
+              <Grid item padding=".5rem 0" xs={12} sm={5} md={4}>
                 <FormItem>
                   <FormInput
                     id="email"
@@ -135,7 +141,7 @@ export const RegisterForm: React.FC = () => {
                   <InvalidField>{errors.email?.message}</InvalidField>
                 </FormItem>
               </Grid>
-              <Grid item padding='.5rem 0' xs={5} sm={5} md={4}>
+              <Grid item padding=".5rem 0" xs={5} sm={5} md={4}>
                 <FormItem>
                   <FormInput
                     id="areaCode"
@@ -147,7 +153,7 @@ export const RegisterForm: React.FC = () => {
                   <InvalidField>{errors.areaCode?.message}</InvalidField>
                 </FormItem>
               </Grid>
-              <Grid item padding='.5rem 0' xs={6} sm={5} md={4}>
+              <Grid item padding=".5rem 0" xs={6} sm={5} md={4}>
                 <FormItem>
                   <FormInput
                     id="phone"
@@ -159,7 +165,7 @@ export const RegisterForm: React.FC = () => {
                   <InvalidField>{errors.phone?.message}</InvalidField>
                 </FormItem>
               </Grid>
-              <Grid item padding='.5rem 0' xs={12} sm={5} md={4}>
+              <Grid item padding=".5rem 0" xs={12} sm={5} md={4}>
                 <FormItem>
                   <FormInput
                     id="password"
@@ -173,8 +179,12 @@ export const RegisterForm: React.FC = () => {
               </Grid>
             </Grid>
             <Grid container justifyContent="space-between">
-              <Button href='/' variant="outlined">Cancel</Button>
-              <Button href='/confirm' type="submit" variant="contained">
+              <Button onClick={() => {
+                navigate(routes.home)
+              }} variant="outlined">
+                Cancel
+              </Button>
+              <Button type="submit" variant="contained">
                 Next
               </Button>
             </Grid>

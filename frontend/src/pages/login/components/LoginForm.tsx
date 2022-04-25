@@ -7,7 +7,8 @@ import {
   FormInput,
   FormPaper,
   InvalidField,
-  FormItem
+  FormItem,
+  LoadingSpinner
 } from '../../../components';
 
 import { UserContext } from '../../../providers/UserProvider';
@@ -101,10 +102,11 @@ export const LoginForm: React.FC = () => {
             </Grid>
 
             <Grid container justifyContent="space-between">
-              <Button variant="outlined">Cancel</Button>
+              <Button href='/' variant="outlined">Cancel</Button>
               <Button type="submit" variant="contained">
                 Log in
               </Button>
+              {userContext.state.isLoading && <LoadingSpinner/> }  
             </Grid>
           </form>
         </FormPaper>
