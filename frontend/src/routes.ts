@@ -10,7 +10,7 @@ const routes = {
   ineedhelp: '/ineedhelp',
   confirm: '/confirm',
   confirmed: '/confirmed/:id',
-  error404: '/error404'
+  error404: '/error404',
 };
 
 export default routes;

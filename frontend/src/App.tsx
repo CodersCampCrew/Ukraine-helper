@@ -14,9 +14,11 @@ import { Confirmed } from './pages/ComfiredPage/Comfired';
 import { Error404 } from './pages/404page/404page';
 import { SelectedCategory } from './pages/selectedCategoryPage/SelectedCategory';
 import { UserContext } from './providers/UserProvider';
+import { Add } from './pages/add/Add';
 
 export const App = () => {
   const userContext = useContext(UserContext);
+  const isLogin = userContext.state.isLoggedIn
   return (
     <Routes>
       <Route path={routes.home} element={<Layout />}>
@@ -28,9 +30,12 @@ export const App = () => {
           element={<SingleAnnouncement />}
         />
 
-        {!userContext.state.isLoggedIn && (
+        {!isLogin && (
           <Route path={routes.register} element={<Register />} />
         )}
+        {isLogin && (
+          <Route path={routes.add} element={<Add/>} />
+        ) }
         <Route path={routes.confirm} element={<Confirm />} />
         <Route path={routes.confirmed} element={<Confirmed />} />
         <Route path={routes.login} element={<LoginForm />} />

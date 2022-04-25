@@ -36,15 +36,16 @@ const Navbar: React.FC = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const navigate = useNavigate();
 
   const userContext = useContext(UserContext);
   const isLogin: boolean = userContext.state.isLoggedIn;
 
   const logoutHandler = () => {
     userContext.actions.logout();
+    navigate(routes.home)
   };
 
-  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
@@ -114,12 +115,16 @@ const Navbar: React.FC = () => {
                   <MenuItem onClick={logoutHandler}>
                     <Typography textAlign="center">Logout</Typography>
                   </MenuItem>
+                  <MenuItem  onClick={() => {
+                    navigate(routes.add)
+                  }}>
+                    <Typography textAlign="center">Add an announcement</Typography>
+                  </MenuItem>
                 </Menu>
               </Box>
             )}
             {!isLogin && (
               <Link
-                
                 underline="none"
                 sx={{ color: '#fff', cursor: 'pointer' }}
                 onClick={() => {
