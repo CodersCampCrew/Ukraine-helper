@@ -103,7 +103,7 @@ export const SingleAnnouncement = () => {
         <a href={`sms:${announcement.phone}`}>
           <span className={styles.button}>
             <FontAwesomeIcon icon={faMessage} />
-            <h3>Send a message</h3>
+            <h3>Chat</h3>
           </span>
         </a>
       </div>
