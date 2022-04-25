@@ -1,99 +1,582 @@
 {
   "swagger": "2.0",
   "info": {
+    "description": "This is a sample server side of Ukraine-Helper app.",
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "Ukrain-Helper"
   },
   "host": "localhost:3000",
   "basePath": "/",
+  "tags": [
+    {
+      "name": "ad",
+      "description": "Offer help by placing and add"
+    }
+  ],
   "schemes": [
     "http"
   ],
   "paths": {
-    "/registerRefugee": {
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/registerVolunteer": {
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/login": {
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
     "/": {
       "post": {
+        "tags": [
+          "ad"
+        ],
+        "summary": "Add a new announcement as a volunteer",
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "operationId": "addAd(announcement)",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Ad object that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ad"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          }
+        }
       }
     },
-    "/all": {
+    "/allAd": {
       "get": {
+        "tags": [
+          "ad"
+        ],
+        "summary": "Show all existing ads",
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "operationId": "allAd",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "All ads to be shown in the browser page",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          }
+        }
       }
     },
     "/transport": {
       "get": {
+        "tags": [
+          "ad"
+        ],
+        "summary": "Find ads offering transport",
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "operationId": "transport",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "All ads to be shown in the browser page",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          }
+        }
       }
     },
-    "/pernamentstay": {
+    "/permanentStay": {
       "get": {
+        "tags": [
+          "ad"
+        ],
+        "summary": "Find ads offering permanent stay",
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "operationId": "permanentStay",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ],
+              "default": "available"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          }
+        }
       }
     },
-    "/temporarystay": {
+    "/temporaryStay": {
       "get": {
+        "tags": [
+          "ad"
+        ],
+        "summary": "Find ads offering temporary stay",
         "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/forkids": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "operationId": "temporaryStay",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ],
+              "default": "available"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          }
+        }
       }
     },
     "/electronic": {
       "get": {
+        "tags": [
+          "ad"
+        ],
+        "summary": "Find ads offering first-need electronic devices",
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "operationId": "electronic",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ],
+              "default": "available"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          }
+        }
       }
     },
-    "/legalassistance": {
+    "/legalAssistance": {
       "get": {
+        "tags": [
+          "ad"
+        ],
+        "summary": "Find ads offering legal assistance",
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "operationId": "legalAssistance",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ],
+              "default": "available"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          }
+        }
       }
     },
-    "/medicalassistance": {
+    "/medicalAssistance": {
       "get": {
+        "tags": [
+          "ad"
+        ],
+        "summary": "Find ads offering medical assistance",
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "operationId": "medicalAssistance",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ],
+              "default": "available"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "BAD REQUEST"
+          }
+        }
       }
+    },
+    "/user/registerRefugee": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Register user as a refugee",
+        "description": "",
+        "operationId": "registerRefugee",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User role: refugee",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/registerVolunteer": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Register user as a volunteer",
+        "description": "",
+        "operationId": "registerVolunteer",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User role: volunteer",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/verify-email/{token}": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Confirms the email of the volunteer",
+        "description": "",
+        "operationId": "verifyEmail",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User role: volunteer",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Email already verfied or none existing"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs user as a volunteer into the system",
+        "description": "",
+        "operationId": "login",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "The user name for login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for login in clear text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Ad": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "createdBy": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "transport",
+            "permanentStay",
+            "temporaryStay",
+            "sleepover",
+            "forkids",
+            "electronic",
+            "legalAssisance",
+            "medicalAssistance"
+          ],
+          "description": "choose from 8 possible types of an ad"
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties"
+        }
+      }
+    },
+    "Properties": {
+      "type": "object",
+      "properties": {
+        "for": {
+          "type": "string"
+        },
+        "closeTo": {
+          "type": "string"
+        },
+        "availableFrom": {
+          "type": "string"
+        },
+        "available": {
+          "type": "date-time"
+        },
+        "desc": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "city": {
+          "type": "integer"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "volunteer",
+            "refugee",
+            "admin"
+          ],
+          "description": "role determins authorization",
+          "default": "volunteer"
+        },
+        "areaCode": {
+          "type": "string"
+        },
+        "emailToken": {
+          "type": "integer"
+        },
+        "verifiedByEmail": {
+          "type": "boolean",
+          "default": false
+        },
+        "verifiedByAdmin": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "ApiResponse": {
+      "type": "object"
     }
   }
 }
