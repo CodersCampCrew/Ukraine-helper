@@ -3,7 +3,7 @@ import {
   Grid,
   Button,
   Typography,
-  inputAdornmentClasses,
+
   Select,
   MenuItem,
   InputLabel,
@@ -16,7 +16,6 @@ import {
   FormInput,
   FormPaper,
   InvalidField,
-  FormItem
 } from '../../../components';
 
 import { UserContext } from '../../../providers/UserProvider';
@@ -104,6 +103,7 @@ export const AddForm: React.FC = () => {
                     variant="filled"
                     {...register('for')}
                   />
+                  <InvalidField>{errors.for?.message}</InvalidField>
                   <FormInput
                     id="closeTo"
                     InputProps={{ disableUnderline: true }}
@@ -111,6 +111,7 @@ export const AddForm: React.FC = () => {
                     variant="filled"
                     {...register('closeTo')}
                   />
+                  <InvalidField>{errors.closeTo?.message}</InvalidField>
                   <FormInput
                     id="availableFrom"
                     InputProps={{ disableUnderline: true }}
@@ -118,6 +119,7 @@ export const AddForm: React.FC = () => {
                     variant="filled"
                     {...register('availableFrom')}
                   />
+                  <InvalidField>{errors.availableFrom?.message}</InvalidField>
                   <FormInput
                     id="available"
                     InputProps={{ disableUnderline: true }}
@@ -125,6 +127,7 @@ export const AddForm: React.FC = () => {
                     variant="filled"
                     {...register('available')}
                   />
+                  <InvalidField>{errors.available?.message}</InvalidField>
                   <FormInput
                     id="desc"
                     InputProps={{ disableUnderline: true }}
@@ -132,6 +135,7 @@ export const AddForm: React.FC = () => {
                     variant="filled"
                     {...register('desc')}
                   />
+                  <InvalidField>{errors.desc?.message}</InvalidField>
                 </FormControl>
               </Grid>
             </Grid>
