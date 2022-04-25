@@ -9,7 +9,7 @@ const routes = {
   login: '/login',
   ineedhelp: '/ineedhelp',
   confirm: '/confirm',
-  confirmed: '/confirmed',
+  confirmed: '/confirmed/:id',
   error404: '/error404'
 };
 

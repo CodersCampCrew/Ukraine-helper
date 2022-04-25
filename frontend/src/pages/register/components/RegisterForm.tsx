@@ -13,7 +13,7 @@ import userService from '../../../services/userService';
 import { useContext } from 'react';
 import { UserContext } from '../../../providers/UserProvider';
 import { useNavigate } from 'react-router-dom';
-import routes from '../../../routes'
+import routes from '../../../routes';
 
 type FormValues = {
   firstName: string;
@@ -75,6 +75,7 @@ export const RegisterForm: React.FC = () => {
     const response = await userService.register(data);
     console.log(response);
     userContext.state.isLoading = false;
+    navigate('/confirm');
   };
 
   return (
@@ -179,9 +180,12 @@ export const RegisterForm: React.FC = () => {
               </Grid>
             </Grid>
             <Grid container justifyContent="space-between">
-              <Button onClick={() => {
-                navigate(routes.home)
-              }} variant="outlined">
+              <Button
+                onClick={() => {
+                  navigate(routes.home);
+                }}
+                variant="outlined"
+              >
                 Cancel
               </Button>
               <Button type="submit" variant="contained">

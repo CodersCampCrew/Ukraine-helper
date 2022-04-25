@@ -52,7 +52,7 @@ const register = (role: roles) => async (req: Request, res: Response) => {
       subject: 'UKH - Confirm email account',
       html: `<h2> Hi ${user.firstName}! Thanks for registering on our site </h2>
              <h4> Please verify your mail to continue...</h4>
-             <a href="http://${req.headers.host}/user/verify-email?token=${user.emailToken}">Verify Your Email!</a>`
+             <a href="http://localhost:3000/confirmed/${user.emailToken}">Verify Your Email!</a>`
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
@@ -80,7 +80,9 @@ export const verifyEmail = async (req: Request, res: Response) => {
       await user.save();
       res.status(StatusCodes.OK).send();
     } else {
-      res.status(StatusCodes.BAD_REQUEST).json({msg: "Email already verfied or none existing" });
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: 'Email already verfied or none existing' });
     }
   } catch (err) {
     console.log(err);
