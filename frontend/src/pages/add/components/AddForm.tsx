@@ -1,3 +1,4 @@
+import * as Yup from 'yup';
 import {
   Grid,
   Button,
@@ -5,7 +6,9 @@ import {
   inputAdornmentClasses,
   Select,
   MenuItem,
-  InputLabel
+  InputLabel,
+  FormControl,
+  SelectChangeEvent
 } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,32 +19,27 @@ import {
   FormItem
 } from '../../../components';
 
- 
 import { UserContext } from '../../../providers/UserProvider';
-import { useContext, useEffect, useState} from 'react';
+import { useContext, useEffect, useState } from 'react';
 import userService from '../../../services/userService';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../../routes';
- 
+
 type FormValues = {
-  category: string
+  category: string;
   for: string;
   closeTo: string;
   availableFrom: string;
-  avaible: Date;
+  available: Date;
   desc: string;
 };
 
 export const AddForm: React.FC = () => {
   const schema = Yup.object().shape({
-    for: Yup.string()
-      .required('For is required'),
-    closeTo: Yup.string()
-      .required('Close To is required'),
-    AvaibleFrom: Yup.string()
-      .required('Avaible From is required'),
-    desc: Yup.string()
-      .required('description is required'),
+    for: Yup.string().required('For is required'),
+    closeTo: Yup.string().required('Close To is required'),
+    AvaibleFrom: Yup.string().required('Avaible From is required'),
+    desc: Yup.string().required('description is required')
   });
   const {
     register,
@@ -49,22 +47,26 @@ export const AddForm: React.FC = () => {
     formState: { errors }
   } = useForm<FormValues>({ resolver: yupResolver(schema) });
 
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
 
   const submitForm: SubmitHandler<FormValues> = async (data) => {
     const response = userService.register(data);
   };
- 
- 
- return (
-   <Grid container direction="row" justifyContent="center">
-     <Grid item>
-       <Typography padding=".5em 0" sx={{ fontSize: '2rem' }}>
-         Category
-       </Typography>
-     </Grid>
-     <Grid item xs={11}>
-     <FormPaper>
+
+  const [category, setCategory] = useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setCategory(event.target.value);
+  };
+  return (
+    <Grid container direction="row" justifyContent="center">
+      <Grid item>
+        <Typography padding=".5em 0" sx={{ fontSize: '2rem' }}>
+          Add an ad!
+        </Typography>
+      </Grid>
+      <Grid item xs={11}>
+        <FormPaper>
           <form onSubmit={handleSubmit(submitForm)}>
             <Grid
               container
@@ -72,25 +74,65 @@ export const AddForm: React.FC = () => {
               justifyContent="space-between"
               sx={{ margin: 'auto 0' }}
             >
-              <Grid item padding='.5rem 0' xs={11} >
-                <FormItem>
-                    <Select id="category" label="category" {...register('category')}>
-                    <MenuItem value={'transport'}>Transport</MenuItem>
+              <Grid item padding=".5rem 0" xs={11}>
+                <FormControl>
+                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    Choose type of service
+                  </InputLabel>
+                  <Select
+                    id="category"
+                    value={category}
+                    {...register('category')}
+                    onChange={handleChange}
+                  >
                     <MenuItem value={'permanentStay'}>Permanent Stay</MenuItem>
                     <MenuItem value={'temporaryStay'}>Temporary Stay</MenuItem>
                     <MenuItem value={'sleepover'}>Sleep over</MenuItem>
                     <MenuItem value={'forkids'}>For Kids</MenuItem>
                     <MenuItem value={'electronic'}>Electronic</MenuItem>
-                    <MenuItem value={'legalAssisntace'}>Legal Assistance</MenuItem>
-                    <MenuItem value={'medicalAssistance'}>Medical Assistance</MenuItem>
-                    </Select>
-                <FormInput
-                    id="input"
+                    <MenuItem value={'legalAssisntace'}>
+                      Legal Assistance
+                    </MenuItem>
+                    <MenuItem value={'medicalAssistance'}>
+                      Medical Assistance
+                    </MenuItem>
+                  </Select>
+                  <FormInput
+                    id="for"
                     InputProps={{ disableUnderline: true }}
-                    label="input"
+                    label="for"
                     variant="filled"
+                    {...register('for')}
                   />
-                </FormItem>
+                  <FormInput
+                    id="closeTo"
+                    InputProps={{ disableUnderline: true }}
+                    label="closeTo"
+                    variant="filled"
+                    {...register('closeTo')}
+                  />
+                  <FormInput
+                    id="availableFrom"
+                    InputProps={{ disableUnderline: true }}
+                    label="availableFrom"
+                    variant="filled"
+                    {...register('availableFrom')}
+                  />
+                  <FormInput
+                    id="available"
+                    InputProps={{ disableUnderline: true }}
+                    label="available"
+                    variant="filled"
+                    {...register('available')}
+                  />
+                  <FormInput
+                    id="desc"
+                    InputProps={{ disableUnderline: true }}
+                    label="description"
+                    variant="filled"
+                    {...register('desc')}
+                  />
+                </FormControl>
               </Grid>
             </Grid>
             <Grid container justifyContent="space-between">
@@ -103,15 +145,7 @@ export const AddForm: React.FC = () => {
             </Grid>
           </form>
         </FormPaper>
-<<<<<<< HEAD
       </Grid>
     </Grid>
   );
 };
-=======
-     </Grid>
-   </Grid>
- );
-}
-;
->>>>>>> 8c5fb3dfc2bba949afae495b229a727ecdf3c119
