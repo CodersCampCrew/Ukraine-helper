@@ -13,6 +13,13 @@ const userService = {
       data: userData
     });
     return data;
+  },
+  async add(adData: {}){
+    const data = await serverAPI.post({
+      url: 'ad/',
+      data: adData
+    });
+    return data;
   }
 };
 
