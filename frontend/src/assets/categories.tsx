@@ -14,43 +14,43 @@ export const categories = [
   {
     name: 'permanent stay',
     icon: <FontAwesomeIcon icon={faBuilding} />,
-    route: '/category/permanentstay',
+    route: 'permanentstay',
     category: 'permanentstay'
   },
   {
     name: 'Temporary stay',
     icon: <FontAwesomeIcon icon={faBuilding} />,
-    route: 'category/temporarystay',
+    route: 'temporarystay',
     category: 'temporarystay'
   },
   {
     name: 'Transport',
     icon: <FontAwesomeIcon icon={faCar} />,
-    route: 'category/transport',
+    route: 'transport',
     category: 'transport'
   },
   {
     name: 'Medical and psychological assistance',
     icon: <FontAwesomeIcon icon={faSyringe} />,
-    route: 'category/medicalassistance',
+    route: 'medicalassistance',
     category: 'medicalassistance'
   },
   {
     name: 'Electronic',
     icon: <FontAwesomeIcon icon={faComputer} />,
-    route: 'category/electronic',
+    route: 'electronic',
     category: 'electronic'
   },
   {
     name: 'Legal assistance',
     icon: <FontAwesomeIcon icon={faSection} />,
-    route: 'category/legalassistance',
+    route: 'legalassistance',
     category: 'legalassistance'
   },
   {
     name: 'For kids',
     icon: <FontAwesomeIcon icon={faChildren} />,
-    route: 'category/forkids',
+    route: 'forkids',
     category: 'forkids'
   }
 ];
