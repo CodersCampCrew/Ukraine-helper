@@ -65,16 +65,16 @@ export const AddForm: React.FC = () => {
           Add an ad!
         </Typography>
       </Grid>
-      <Grid item xs={11}>
+      <Grid item xs={9}>
         <FormPaper>
           <form onSubmit={handleSubmit(submitForm)}>
             <Grid
               container
               direction="row"
-              justifyContent="space-between"
+              justifyContent="center"
               sx={{ margin: 'auto 0' }}
             >
-              <Grid item padding=".5rem 0" xs={11}>
+              <Grid item padding="1rem 2rem" xs={11}>
                 <FormControl>
                   <InputLabel variant="standard" htmlFor="uncontrolled-native">
                     Choose type of service
@@ -103,6 +103,7 @@ export const AddForm: React.FC = () => {
                     label="for"
                     variant="filled"
                     {...register('for')}
+                    sx={{margin: '1rem 0'}}
                   />
                   <FormInput
                     id="closeTo"
@@ -110,6 +111,7 @@ export const AddForm: React.FC = () => {
                     label="closeTo"
                     variant="filled"
                     {...register('closeTo')}
+                    sx={{margin: '1rem 0'}}
                   />
                   <FormInput
                     id="availableFrom"
@@ -117,6 +119,7 @@ export const AddForm: React.FC = () => {
                     label="availableFrom"
                     variant="filled"
                     {...register('availableFrom')}
+                    sx={{margin: '1rem 0'}}
                   />
                   <FormInput
                     id="available"
@@ -124,6 +127,7 @@ export const AddForm: React.FC = () => {
                     label="available"
                     variant="filled"
                     {...register('available')}
+                    sx={{margin: '1rem 0'}}
                   />
                   <FormInput
                     id="desc"
@@ -131,6 +135,7 @@ export const AddForm: React.FC = () => {
                     label="description"
                     variant="filled"
                     {...register('desc')}
+                    sx={{margin: '1rem 0'}}
                   />
                 </FormControl>
               </Grid>
