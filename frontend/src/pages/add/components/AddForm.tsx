@@ -18,27 +18,26 @@ import { useNavigate } from 'react-router-dom';
 import routes from '../../../routes';
  
 type FormValues = {
- category: string;
- for: string;
- from: string;
- to: string;
- time: Date;
- desc: string;
+  category: string
+  for: string;
+  closeTo: string;
+  availableFrom: string;
+  avaible: Date;
+  desc: string;
 };
- 
+
 export const AddForm: React.FC = () => {
- const schema = Yup.object().shape({
-   input: Yup.string()
-     .required('For is required'),
- });
- 
- const [category, setCategory] = useState('');
-
- const handleChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value);
-
-
- const {
+  const schema = Yup.object().shape({
+    for: Yup.string()
+      .required('For is required'),
+    closeTo: Yup.string()
+      .required('Close To is required'),
+    AvaibleFrom: Yup.string()
+      .required('Avaible From is required'),
+    desc: Yup.string()
+      .required('description is required'),
+  });
+  const {
     register,
     handleSubmit,
     formState: { errors }
@@ -47,9 +46,8 @@ export const AddForm: React.FC = () => {
   const userContext = useContext(UserContext)
 
   const submitForm: SubmitHandler<FormValues> = async (data) => {
-    const response = userService.add(data);
+    const response = userService.register(data);
   };
-
  
  
  return (
@@ -70,7 +68,7 @@ export const AddForm: React.FC = () => {
             >
               <Grid item padding='.5rem 0' xs={11} >
                 <FormItem>
-                    <Select id="category" label="category" onChange={handleChange}>
+                    <Select id="category" label="category" {...register('category')}>
                     <MenuItem value={'transport'}>Transport</MenuItem>
                     <MenuItem value={'permanentStay'}>Permanent Stay</MenuItem>
                     <MenuItem value={'temporaryStay'}>Temporary Stay</MenuItem>
@@ -85,9 +83,7 @@ export const AddForm: React.FC = () => {
                     InputProps={{ disableUnderline: true }}
                     label="input"
                     variant="filled"
-                    {...register('input')}
                   />
-                  <InvalidField>{errors.for?.message}</InvalidField>
                 </FormItem>
               </Grid>
             </Grid>
@@ -102,4 +98,5 @@ export const AddForm: React.FC = () => {
      </Grid>
    </Grid>
  );
-};
+}
+;
