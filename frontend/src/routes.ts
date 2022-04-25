@@ -3,7 +3,7 @@ const routes = {
   category: '/category',
   singleAnnouncement: '/announcements/:id',
   announcements: '/announcements',
-  sample: '/sample',
+  add: '/announcements/add',
   register: '/register',
   login: '/login',
   ineedhelp: '/ineedhelp',

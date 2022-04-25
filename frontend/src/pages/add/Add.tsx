@@ -1,9 +1,10 @@
 import { Grid } from '@mui/material';
- 
-export const Register: React.FC = () => {
- return (
-   <Grid container justifyContent="center">
- 
-   </Grid>
- );
+import { AddForm } from './components/AddForm';
+
+export const Add: React.FC = () => {
+  return (
+    <Grid container justifyContent="center">
+      <AddForm />
+    </Grid>
+  );
 };
