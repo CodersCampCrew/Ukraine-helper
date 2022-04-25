@@ -6,7 +6,7 @@ import styles from './category.module.css';
 export const Category = () => {
   const list = categories.map((e) => {
     return (
-      <Link to="/announcements" state={e.category}>
+      <Link to={e.route} key={e.name}>
         <div className={styles.singleCategory}>
           <div className={styles.contentContainer}>{e.name}</div>
           <div className={styles.iconContainer}>{e.icon}</div>

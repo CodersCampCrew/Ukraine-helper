@@ -31,7 +31,7 @@ export interface Transport extends commonInfo {
     desc: string;
   };
 }
-export interface PermanentStay extends commonInfo {
+export interface permanentStay extends commonInfo {
   category: Categories.permanentStay;
   properties: {
     for: string;
@@ -104,7 +104,7 @@ export interface MedicalAssistance extends commonInfo {
 
 export type Ad =
   | Transport
-  | PermanentStay
+  | permanentStay
   | TemporaryStay
   | Sleepover
   | ForKids

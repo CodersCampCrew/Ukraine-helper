@@ -1,0 +1,17 @@
+.sign {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  margin: 5px;
+}
+.signElement {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 1px;
+  display: inline-block;
+  margin-right: 5px;
+}
+.icon {
+  position: relative;
+  top: 10px;
+  right: 10px;
+}
