@@ -27,7 +27,6 @@ export const App = () => {
           path={routes.singleAnnouncement}
           element={<SingleAnnouncement />}
         />
-        <Route path={routes.sample} element={<div />} />
 
         {!userContext.state.isLoggedIn && (
           <Route path={routes.register} element={<Register />} />

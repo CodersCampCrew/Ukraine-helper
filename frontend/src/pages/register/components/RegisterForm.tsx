@@ -170,6 +170,7 @@ export const RegisterForm: React.FC = () => {
                 <FormItem>
                   <FormInput
                     id="password"
+                    type="password"
                     InputProps={{ disableUnderline: true }}
                     label="Password"
                     variant="filled"
